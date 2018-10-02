@@ -17,7 +17,6 @@ RUN echo "http_proxy=${PROXY}" >> /home/rstudio/.Renviron
 RUN echo "https_proxy=${PROXY}" >> /home/rstudio/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/rstudio/.Renviron
 
-
 # Install base Rapporteket packages in R 
 RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
 
