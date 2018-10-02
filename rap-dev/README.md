@@ -45,13 +45,16 @@ configuration file (_e.g. ~/.docker/config.json_):
 }
 ```
 In addition, to make your console in RStudio aware of the proxy environment
-variables, also define the corresponding proxy server in the _Dockerfile_. If
-you have not done so already pull the docker image:
+variables, also define the corresponding proxy server in the _Dockerfile_
+(you will need this for instance if doing things like _install.packages()_
+from the RStudio console within the container). This requires rebuilding of
+the docker image and in order to do so you will need the _Dockerfile_ which
+is available from github:
 ```bash
-docker pull areedv/rap-dev:latest
+git clone https://github.com/Rapporteket/docker.git
 ```
-
-Then edit the relevant part of the _Dockerfile_:
+Move into the directory _docker/rap-dev_ and edit the relevant part of the 
+_Dockerfile_:
 
 ```bash
 # making proxy def (and other env vars) go all the way into Rstudio console
@@ -62,7 +65,10 @@ Then, rebuild the container:
 ```bash
 docker build -t rap-dev .
 ```
-and run the newly configured container.
+and run the newly configured container from your local docker image repo:
+```bash
+docker run -e PASSWORD=password --rm -p 8787:8787 rap-dev
+```
 
 ### Add one or more nameservers
 Somewhat related to proxied connections one might also need to define servers
