@@ -21,11 +21,11 @@ configuration file:
 
 ```json
 {
-        "proxies": {
-                "default": {
-                        "httpProxy": "your.proxy.url"
-                }
-        }
+  "proxies": {
+    "default": {
+      "httpProxy": "your.proxy.url"
+    }
+  }
 }
 ```
 
