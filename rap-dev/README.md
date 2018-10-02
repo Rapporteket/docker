@@ -1,6 +1,8 @@
 # R development environment for Rapporteket
-[![](https://img.shields.io/docker/automated/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/docker/builds/)
-[![](https://img.shields.io/docker/build/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/docker/builds/)
+[![](https://img.shields.io/docker/automated/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/rap-dev/builds/)
+[![](https://img.shields.io/docker/build/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/rap-dev/builds/)
+[![](https://img.shields.io/docker/pulls/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/rap-dev)
+
 
 ## Introduction
 This is a Docker file for an R developing environment to be used in task
