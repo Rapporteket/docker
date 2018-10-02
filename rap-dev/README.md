@@ -10,8 +10,8 @@ related to reporting services at Rapporteket.
 
 The Docker container builds ontop of
 [verse](https://hub.docker.com/r/rocker/verse) and has the
-[rapbase](https://github.com/Rapporteket/rapbase) R package pre-built from the
-_rel_ branch.
+[rapbase](https://github.com/Rapporteket/rapbase) R package (and its
+dependencies) pre-built from the _rel_ branch.
 
 ## Usage
 
