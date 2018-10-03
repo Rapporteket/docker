@@ -49,7 +49,7 @@ variables, also define the corresponding proxy server in the _Dockerfile_
 (you will need this for instance if doing things like _install.packages()_
 from the RStudio console within the container). This requires rebuilding of
 the docker image and in order to do so you will need the _Dockerfile_ which
-is available from github:
+is available from github (this repo):
 ```bash
 git clone https://github.com/Rapporteket/docker.git
 ```
