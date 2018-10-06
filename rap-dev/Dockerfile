@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y netcat-openbsd
 
 # making proxy def (and other env vars) go all the way into Rstudio console
 # based on https://github.com/rocker-org/rocker-versioned/issues/91
-ARG PROXY=172.29.3.227:8080
+ARG PROXY=
 ENV http_proxy=${PROXY}
 ENV https_proxy=${PROXY}
 
