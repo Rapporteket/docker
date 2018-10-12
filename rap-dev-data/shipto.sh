@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# set proxy
-http_proxy="www-proxy.helsenord.no:8080"
-https_proxy=$http_proxy
-
 # get pubkey of user $1
 curl -sf "https://github.com/$1.keys" | head -n1 > pubkey
 echo "\nPubkey:\n"
