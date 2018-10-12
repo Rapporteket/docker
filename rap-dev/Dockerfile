@@ -1,7 +1,15 @@
 FROM rocker/verse
 
+ENV DEBIAN_FRONTEND noninteractive
+ENV LC_TIME nb_NO.UTF-8
+
 # need this for ssh through proxy?
-RUN apt-get update && apt-get install -y netcat-openbsd
+RUN apt-get update && apt-get install -yq \
+    apt-utils \
+    #locales \
+    mysql-client \
+    netcat-openbsd \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # making proxy def (and other env vars) go all the way into Rstudio console
 # based on https://github.com/rocker-org/rocker-versioned/issues/91
@@ -23,4 +31,3 @@ RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/rstudio/.Renviron
 
 # Install base Rapporteket packages in R 
 RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
-
