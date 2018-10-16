@@ -64,6 +64,28 @@ found in the *~/.ssh* directory and the corresponding entry in
     - ~/.ssh:/home/rstudio/.ssh
   ...
 ```
-where all after the ":" defines the mount point within the container.
+where all after the ":" defines the mount point within the container. Please
+adjust the part before the ":" according to where your private key is stored.
 
+The containers can the be started. For a linux type host navigate to the
+directory holding your *docker-compose.yml* file and start by running:
+```bash
+docker-compose up
+```
+
+from the command line.
+
+### Stop containers
+Using the above start up command pres ```ctrl + c``` to stop the containers.
+Docker will save the state of your containers for the next time you start
+them. Any data that you've been working on will still be there once you
+start your containers the next time. For the security of your data this migth
+not be desirable. In that case it is recommended to remove your containers
+(but keeping the initial images) by running the following command after the
+containers have been stoppe:
+```bash
 docker rm -vf $(docker ps -a -q)
+```
+
+Next time the container are starte they will be in initial state meaning the
+any data payload must be decrypted agian.
