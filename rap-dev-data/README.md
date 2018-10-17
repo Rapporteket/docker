@@ -19,7 +19,7 @@ corresponding key.
 
 ## Usage
 
-### Prerequisite
+### Prerequisites
 Docker must be installed, please refere to the instructions for
 [Windows](https://docs.docker.com/docker-for-windows/install/)
 and
@@ -30,7 +30,7 @@ please make sure to install
 [docker-compose](https://docs.docker.com/compose/install/)
 after the docker engine has been installed.
 
-### Start
+### Start containers
 *rap-dev-data* is based on two co-working docker containers and both are
 started the
 [docker-compose.yml file](https://github.com/Rapporteket/docker/blob/master/rap-dev-data/docker-compose.yml)
@@ -65,27 +65,47 @@ found in the *~/.ssh* directory and the corresponding entry in
   ...
 ```
 where all after the ":" defines the mount point within the container. Please
-adjust the part before the ":" according to where your private key is stored.
+adjust the part before the ":" according to where your private key is stored
+on the host.
 
-The containers can the be started. For a linux type host navigate to the
+Then, start up the  containers. For a linux type host navigate to the
 directory holding your *docker-compose.yml* file and start by running:
 ```bash
 docker-compose up
 ```
 
-from the command line.
+from the command line. If the docker images are already downloaded RStudio
+will shortly by accessible navigating your browser to
+[localhost:8787](localhost:8787). If the images are not present on your
+host computer please be patient and allow docker to download the images before
+they are started. Once the containers are started log into RStudio witn user
+"rstudio" and password "password".
 
 ### Stop containers
 Using the above start up command pres ```ctrl + c``` to stop the containers.
-Docker will save the state of your containers for the next time you start
-them. Any data that you've been working on will still be there once you
-start your containers the next time. For the security of your data this migth
-not be desirable. In that case it is recommended to remove your containers
-(but keeping the initial images) by running the following command after the
-containers have been stoppe:
+Docker will save the state of your containers and any data that you've been
+working on will still be there once you start your containers the next time.
+For the security of your data this migth not be desirable. In that case it is
+recommended to remove your containers (but keeping the initial images) by
+running the following command after the containers have been stopped:
 ```bash
 docker rm -vf $(docker ps -a -q)
 ```
 
-Next time the container are starte they will be in initial state meaning the
-any data payload must be decrypted agian.
+Next time the container are started they will be in their initial states and
+any data payload must be decrypted all over agian.
+
+### Initializing container data
+If you have requested a tag of *rap-dev-data* that contains data, the relevant
+image will hold these in an encrypted form. Hence, at the initial state of the
+container the data payload must be decrypted to enable further use. An
+init-script is provided to aid decryption, loading of data into the mysql
+database, installation of various configuration files, etc. Once logged into
+RStudio open the terminal tab and run the init script:
+```bash
+./init.sh
+```
+
+You will be prompted for the password to your private key used for decryption
+and root password for your mysql database. The latter is by default set to
+"root".
