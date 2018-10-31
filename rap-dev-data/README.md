@@ -109,3 +109,67 @@ RStudio open the terminal tab and run the init script:
 You will be prompted for the password to your private key used for decryption
 and root password for your mysql database. The latter is by default set to
 "root".
+
+### Behind a proxy
+Doing your Rapporteket work behind a proxy server tend to complicate things
+slightly. In summary, the proxy settings must be pre-built into the image
+that is used to provie you with the RStudio container. The below 3 steps will
+help you get up and running with a develoment environment that reflects your
+proxy server settings.
+
+#### Step 1: Re-build the _rap-dev_ image with your proxy settings
+Please follow 
+[the guide provided for _rap-dev_](https://github.com/Rapporteket/docker/tree/master/rap-dev#behind-a-proxy).
+
+#### Step 2: Re-build the _rap-dev-data_ image
+The _rap-dev-data_ container depend on _rap-dev_ and since the latter now has
+changed this must also be applied to the _rap-dev-data_ image.
+
+In the previous step the Rapporteket Docker repo was downloaded from GitHub
+(if not, re-visit Step 1). Now, move into the _docker/rap-dev-data_ directory
+and rebuild the _rap-dev-data_ image:
+```bash
+docker build -t rap-dev-data .
+```
+
+#### Step 3: Start your re-configured container
+Make sure your docker-compose.yml file refers to the local images and star it
+as per normal:
+```bash
+docker-compose up
+```
+
+### Add one or more nameserver
+Nameservers can be defined during startup of the container and providing these
+may be relevant in particular if behind a proxy server. On Ubuntu <=14 your
+nameservers can be liste using the command:
+```bash
+nmcli dev list iface <interfacename> | grep IP4
+```
+or for Ubuntu >=15:
+```bash
+nmcli device show <interfacename> | grep IP4.DNS
+```
+Most likely <interfacename> should be replaced by _eth0_, _wlan0_ or similar.
+
+Then, provide the IP(s) of your nameserver(s) in the _docker-compose.yml_ file:
+
+```yaml
+...
+   dev:
+     depends_on:
+       - db
+     image: rap-dev-data
+     volumes:
+       - ~/.ssh:/home/rstudio/.ssh
+     ports:
+       - "8787:8787"
+     dns:
+       - 8.8.8.8
+       - dns_ip_1
+       - dns_ip_2
+       - dns_ip_3
+...
+```
+
+
