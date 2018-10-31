@@ -28,44 +28,40 @@ logging into RStudio within the container. The _--rm_ option removes the
 container when the session is terminated (ctrl + c).
 
 ### Behind a proxy
-Dependeing on your environment and usecases being behind a proxy server might
+Depending on your environment and usecases being behind a proxy server might
 cause minor or even major problems. One or both of the blow steps might
 help you get going.
 
-To make your container aware of your proxy add the following to your json
+To make the docker client aware of your proxy add the following to your json
 configuration file (_e.g. ~/.docker/config.json_):
 
 ```json
 {
   "proxies": {
     "default": {
-      "httpProxy": "[your.proxy.ip]:[your_proxy_port_number]"
+      "httpProxy": "[your.proxy.ip]:[your_proxy_port_number]",
+      "httpsProxy": "[your.tls-proxy.ip]:[your_proxy_port_number]",
+      "noProxy": "test.site1.com,*.site2.com,*.site3.com"
     }
   }
 }
 ```
-In addition, to make your console in RStudio aware of the proxy environment
-variables, also define the corresponding proxy server in the _Dockerfile_
-(you will need this for instance if doing things like _install.packages()_
-from the RStudio console within the container). This requires rebuilding of
-the docker image and in order to do so you will need the _Dockerfile_ which
-is available from github (this repo):
+In addition, to make your console in RStudio within the container aware of the
+proxy environment variables the container image must also contain these
+settings (you will need this for instance if doing things like 
+_install.packages()_ from the RStudio console within the container). This
+requires rebuilding of the docker image and in order to do so you will need the
+_Dockerfile_ which is available from github (this repo):
 ```bash
 git clone https://github.com/Rapporteket/docker.git
 ```
-Move into the directory _docker/rap-dev_ and edit the relevant part of the 
-_Dockerfile_:
-
+Move into the directory _docker/rap-dev_ and rebuild the container with the 
+_PROXY_ build argument:
 ```bash
-# making proxy def (and other env vars) go all the way into Rstudio console
-# based on https://github.com/rocker-org/rocker-versioned/issues/91
-ARG PROXY=[your.proxy.ip]:[your_proxy_port_number]
+docker build --build-arg PROXY=http://[your.proxy.ip]:[your_proxy_port_number] -t rap-dev .
 ```
-Then, rebuild the container:
-```bash
-docker build -t rap-dev .
-```
-and run the newly configured container from your local docker image repo:
+The above method uses the _PROXY_ value both for HTTP\_PROXY and HTTPS\_PROXY.
+Then, run the newly configured container from your local docker image repo:
 ```bash
 docker run -e PASSWORD=password --rm -p 8787:8787 rap-dev
 ```
