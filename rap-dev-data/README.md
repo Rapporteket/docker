@@ -150,7 +150,7 @@ or for Ubuntu >=15:
 ```bash
 nmcli device show <interfacename> | grep IP4.DNS
 ```
-Most likely <interfacename> should be replaced by _eth0_, _wlan0_ or similar.
+Most likely \<interfacename\> should be replaced by _eth0_, _wlan0_ or similar.
 
 Then, provide the IP(s) of your nameserver(s) in the _docker-compose.yml_ file:
 
