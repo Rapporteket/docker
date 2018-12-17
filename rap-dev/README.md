@@ -10,8 +10,10 @@ related to reporting services at Rapporteket.
 
 The Docker container builds ontop of
 [verse](https://hub.docker.com/r/rocker/verse) and has the
-[rapbase](https://github.com/Rapporteket/rapbase) R package (and its
-dependencies) pre-built from the _rel_ branch.
+[rapbase](https://github.com/Rapporteket/rapbase) (rel branch) and
+[raptools](https://github.com/Rapporteket/raptools) R packages
+(and their dependencies) pre-built. In addition, shiny-server is also
+enabled.
 
 ## Usage
 When running the docker image your container will be accessed by a browser
@@ -20,12 +22,13 @@ pointing at a given port at localhost.
 ### Plain
 Run the _rap-dev_ container from command line:
 ```bash
-docker run -e PASSWORD=password --rm -p 8787:8787 areedv/rap-dev:latest
+docker run -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 areedv/rap-dev:latest
 ```
 This will download the image from hub.docker.com and run the container
-exposing it on port 8787 at localhost. The PASSWORD setting will be used for
-logging into RStudio within the container. The _--rm_ option removes the
-container when the session is terminated (ctrl + c).
+exposing it on ports 3838 (shiny-server) and 8787 (RStudio) at localhost. The
+PASSWORD setting will be used for logging into RStudio within the container.
+The _--rm_ option removes the container when the session is terminated
+(ctrl + c).
 
 ### Behind a proxy
 Depending on your environment and usecases being behind a proxy server might
@@ -63,7 +66,7 @@ docker build --build-arg PROXY=http://[your.proxy.ip]:[your_proxy_port_number] -
 The above method uses the _PROXY_ value both for HTTP\_PROXY and HTTPS\_PROXY.
 Then, run the newly configured container from your local docker image repo:
 ```bash
-docker run -e PASSWORD=password --rm -p 8787:8787 rap-dev
+docker run -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 rap-dev
 ```
 
 ### Add one or more nameservers
@@ -71,7 +74,7 @@ Somewhat related to proxied connections one might also need to define servers
 for name lookups (dns) explicitly. This can be done with the _--dns_ option
 when running the container:
 ```bash
-docker run --dns your.dns.server.ip --dns 8.8.8.8 -v -e PASSWORD=password --rm -p 8787:8787 areedv/rap-dev:latest
+docker run --dns your.dns.server.ip --dns 8.8.8.8 -v -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 areedv/rap-dev:latest
 ```
 
 ### Interact with GitHub with secure shell and public key
@@ -92,7 +95,7 @@ Host githubThroughProxy
 Based on the above example access to the _.ssh_ directory is defined by the
 _-v_ option when running the container:
 ```bash
-docker run -v ~/.ssh:/home/rstudio/.ssh -e PASSWORD=password --rm -p 8787:8787 areedv/rap-dev:latest
+docker run -v ~/.ssh:/home/rstudio/.ssh -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 areedv/rap-dev:latest
 ```
 
 Then, from within RStudio in your container new projects can be started from
