@@ -29,5 +29,9 @@ RUN echo "https_proxy=${PROXY}" >> /home/rstudio/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/rstudio/.Renviron
 RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/rstudio/.Renviron
 
+# add user to sudoers and enable shiny server
+ENV ROOT=TRUE
+RUN export ADD=shiny && bash /etc/cont-init.d/add
+
 # Install base Rapporteket packages in R 
 #RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
