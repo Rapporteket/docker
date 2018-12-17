@@ -34,4 +34,5 @@ ENV ROOT=TRUE
 RUN export ADD=shiny && bash /etc/cont-init.d/add
 
 # Install base Rapporteket packages in R 
-#RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
+RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
+RUN R -e "devtools::install_github('Rapporteket/raptools')"
