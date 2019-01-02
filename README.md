@@ -17,3 +17,6 @@ provided below.
 
 ## Development environment for Rapporteket
 Please navigate [here](https://github.com/Rapporteket/docker/tree/master/rap-dev)
+
+## Development environment with data for Rapporteket
+Please navigate [here](https://github.com/Rapporteket/docker/tree/master/rap-dev-data)
