@@ -74,7 +74,7 @@ Somewhat related to proxied connections one might also need to define servers
 for name lookups (dns) explicitly. This can be done with the _--dns_ option
 when running the container:
 ```bash
-docker run --dns your.dns.server.ip --dns 8.8.8.8 -v -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 areedv/rap-dev:latest
+docker run --dns your.dns.server.ip --dns 8.8.8.8 -v ~/.ssh:/home/rstudio/.ssh -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 areedv/rap-dev:latest
 ```
 
 ### Interact with GitHub with secure shell and public key
