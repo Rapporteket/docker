@@ -3,6 +3,7 @@ version: '3.3'
 services:
    db:
      image: mysql:5.7
+     command: --innodb-log-file-size=500M --innodb_strict_mode=0
      restart: "no"
      environment:
        MYSQL_ROOT_PASSWORD: root
@@ -10,11 +11,15 @@ services:
    dev:
      depends_on:
        - db
-     image: rap-dev-data:latest
+     image: rap-dev-data
      volumes:
        - ~/.ssh:/home/rstudio/.ssh
+       - ~/.gitconfig:/home/rstudio/.gitconfig
      ports:
        - "8787:8787"
+       - "3838:3838"
+     dns:
+       - 8.8.8.8
      restart: "no"
      environment:
        PASSWORD: password
