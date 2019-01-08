@@ -76,10 +76,11 @@ docker-compose up
 
 from the command line. If the docker images are already downloaded RStudio
 will shortly by accessible navigating your browser to
-[localhost:8787](localhost:8787). If the images are not present on your
+[localhost:8787](http://localhost:8787). If the images are not present on your
 host computer please be patient and allow docker to download the images before
 they are started. Once the containers are started log into RStudio witn user
-"rstudio" and password "password".
+"rstudio" and password "password". To acccess shiny-server navigate your
+browser to [localhost:3838](http://localhost:3838) (no password needed).
 
 ### Stop containers
 Using the above start up command pres ```ctrl + c``` to stop the containers.

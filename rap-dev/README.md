@@ -16,8 +16,8 @@ The Docker container builds ontop of
 enabled.
 
 ## Usage
-When running the docker image your container will be accessed by a browser
-pointing at a given port at localhost.
+  When running the docker image your container will be accessed by a web-browser
+pointing at given ports at localhost.
 
 ### Plain
 Run the _rap-dev_ container from command line:
@@ -25,7 +25,8 @@ Run the _rap-dev_ container from command line:
 docker run -e PASSWORD=password --rm -p 3838:3838 -p 8787:8787 areedv/rap-dev:latest
 ```
 This will download the image from hub.docker.com and run the container
-exposing it on ports 3838 (shiny-server) and 8787 (RStudio) at localhost. The
+exposing it on [localhost:3838](http://localhost:3838) (shiny-server) and
+[localhost:8787](http://localhost:8787) (RStudio) through your web-browser.
 PASSWORD setting will be used for logging into RStudio within the container.
 The _--rm_ option removes the container when the session is terminated
 (ctrl + c).
