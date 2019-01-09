@@ -165,6 +165,7 @@ Then, provide the IP(s) of your nameserver(s) in the _docker-compose.yml_ file:
        - ~/.ssh:/home/rstudio/.ssh
      ports:
        - "8787:8787"
+       - "3838:3838"
      dns:
        - 8.8.8.8
        - dns_ip_1
