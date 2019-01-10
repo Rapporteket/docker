@@ -96,23 +96,59 @@ docker rm -vf $(docker ps -a -q)
 Next time the container are started they will be in their initial states and
 any data payload must be decrypted all over agian.
 
+
+### Adding data payload
+Skip this section if you use a container that has data pre-built. If
+you use the _nodata_ tag of this container and have requested and been provided
+with the file _payload.tar.gz_, please read on.
+
+Your local data must be present within the container. Hence, you need to
+re-build the container according to the following three steps:
+
+#### Step 1: Get the docker-files
+If you havent done so already, clone the _docker_ project from Rapporteket at
+GitHub:
+```bash
+git clone https://github.com/Rapporteket/docker.git
+```
+
+#### Step 2: Edit the docker files
+Move into the directory _docker/rap-dev-data_. In _Dockerfile_ un-comment the
+line
+```bash
+#COPY --chown=rstudio:rstudio payload.tar.gz /home/rstudio/regData/
+```
+by removing the "#" at the start of the line. Then, save and exit.
+
+#### Step 3: Build the container
+Move the file _payload.tar.gz_ into the same directory as _Dockerfile_. Then,
+from the same directory, build the container:
+```bash
+docker build -t rap-dev-data .
+```
+
 ### Initializing container data
-If you have requested a tag of *rap-dev-data* that contains data, the relevant
-image will hold these in an encrypted form. Hence, at the initial state of the
-container the data payload must be decrypted to enable further use. An
+If you have requested a tag of *rap-dev-data* that contains data or you have
+built the container locally adding your own _payload.tar.gz_-file, your
+image will hold these data  in an encrypted form. Hence, at the initial state
+of the container the data payload must be decrypted to enable further use. An
 init-script is provided to aid decryption, loading of data into the mysql
-database, installation of various configuration files, etc. Once logged into
-RStudio open the terminal tab and run the init script:
+database, installation of various configuration files, etc. Once your container
+is started, your web browser is navigated to
+[localhost:8787](http://localhost:8787) and you are logged into RStudio, open
+the RStudio terminal tab and run the init script:
 ```bash
 ./init.sh
 ```
 
 You will be prompted for the password to your private key used for decryption
 and root password for your mysql database. The latter is by default set to
-"root".
+"root". Please note that use of shiny-server in this container may also depend
+on configuration provided through this init-script. Therefore, make sure to run
+it first every time the container is started in its initial state. 
 
 ### Behind a proxy
-Doing your Rapporteket work behind a proxy server tend to complicate things
+Use of this container behind a proxy server tend to complicate things
 slightly. In summary, the proxy settings must be pre-built into the image
 that is used to provie you with the RStudio container. The below 3 steps will
 help you get up and running with a develoment environment that reflects your
