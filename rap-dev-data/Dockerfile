@@ -7,6 +7,6 @@ RUN usermod -a -G staff shiny
 ADD --chown=root:root rapShinyApps.tar.gz /srv/shiny-server/
 
 # add data payload and scripts
-#COPY --chown=rstudio:rstudio payload.tar.gz /home/rstudio/regData/
+COPY --chown=rstudio:rstudio payload.tar.gz /home/rstudio/regData/
 COPY --chown=rstudio:rstudio dec.sh /home/rstudio/regData/
 COPY --chown=rstudio:rstudio init.sh /home/rstudio/
