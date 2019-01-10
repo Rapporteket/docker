@@ -30,6 +30,24 @@ please make sure to install
 [docker-compose](https://docs.docker.com/compose/install/)
 after the docker engine has been installed.
 
+NB! Please follow the above install instructions carefully. The method used to
+successfully install docker will depend on your type
+of OS (and even different versions of the same OS). You might even need to
+alter BIOS-settings on your computer if virtualization is not already enabled.
+
+This documentation is based on docker hosted on a linux-type OS. Hence,
+following these instructions you might find yourself stuck on other
+platforms. For instance, if you are running the container on an older Windows
+OS using Docker Toolbox the web browser address
+[localhost:8787](http://localhost:8787) will not get
+you to the right place. Instead, you might find the corresponding site at
+[192.168.99.100:8787](http://192.168.99.100:8787). The actual IP in this case
+can be found by running
+```bash
+docker-machine ip default
+```
+in the Docker Quick Start Terminal.
+
 ### Start containers
 *rap-dev-data* is based on two co-working docker containers and both are
 started the
