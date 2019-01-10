@@ -11,7 +11,7 @@ services:
    dev:
      depends_on:
        - db
-     image: rap-dev-data
+     image: areedv/rap-dev-data:nodata
      volumes:
        - ~/.ssh:/home/rstudio/.ssh
        - ~/.gitconfig:/home/rstudio/.gitconfig
