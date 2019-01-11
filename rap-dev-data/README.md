@@ -229,4 +229,70 @@ Then, provide the IP(s) of your nameserver(s) in the _docker-compose.yml_ file:
 ...
 ```
 
+## Data protection
+Getting the most out of the _rap-dev-data_ container depend on the availablity
+of sensible data. The purpose of the following text is pure informational,
+mainly on how the data is protected both at rest (storage) and during
+transport and will apply regardless if the container image comes with data
+pre-built or if users add data to the container after it has been fetched.
 
+### Organizational measures
+In this context there are two parties involved; the _provider_ and the
+_user_ where the direction of flow is from the first to the latter. Formally,
+by law/regulation the _user_ represents the _data owner_ and the _provider_
+represents the _data processor_ acting under instruction from the _data owner_.
+At both ends data will be at rest (stored) and during exchange data will be
+transported. Flow of data is always initiated by a request from the _user_ to
+the _provider_ and is only possible (see Technical measures) if the _user_ is a
+member of the _Rapporteket_ organization at GitHub. Membership in this
+organization can be obtained by persons cooperating on registry statistics and
+is granted base on user application and a following approval by administrators
+of this organization.
+
+This arrangement ensures that the _provider_ and the _user_ have both a formal
+and a practical relation prior to any exchange of data.
+
+### Technical measures
+A data set to be used in conjunction with this docker container is encrypted
+by the _provider_ following a hybrid scheme: the data is encrypted applying a
+disposable symmetric key and this key is in turn asymetrically encrypted using
+a public key provided by the _user_ (resipient of data). Here, the term
+"hybrid" referes to that both symmetric an asymmetric encrytion is performed,
+and the term
+"disposable" means that the symmetric key will only be applied once and never
+re-used for encryption of data. The public key is assosiated with a
+corresponding private key that is kept secret and only accessible by the person
+owning it (in contrast to the public key that can be shared freely). The 
+_provider_
+then deliver the encrypted data to the _user_. After receiving the data the
+_user_ follow the reverse hybrid scheme: the encrypted symmetric key is
+decrypted applying the corresponding private key and then the decrypted
+symmetric key is used to decrypt the data set itself.
+
+Method of encryption consists of generating a randomized 256 bit key. This key
+is then used to encrypt data following the
+[Advance Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard). The recipients public key is collected from his/hers user account
+at GitHub and used to asymmetrically encrypt the symmetric key. The
+encrypted data and encrypted key is then shipped to the resipient.
+
+This scheme ensures that data privacy are sufficiently protected (ref) and that
+decryption only can be performed by the recipient.
+
+
+### Ways of data delivery (transport)
+A data set can be delivered by e-mail, which is a method commonly used when
+statisticians need data from the registries they work on. E-mail is _per se_
+an insecure channel; the sender or recipient cannot control or prevent
+evesdroping or any temporary of permanent storage of e-mail content in transit.
+However, when the content itself (_e.g._ data) is properly protected by methods
+approved by the _data owner_ this method can still be safely applied for data
+transportation.
+
+Alternatively, a data set can be bundled into the container image and
+exposed in a cloud service for retrieval. The cloud service may _per se_ be
+publicly accessible and hence insecure in terms of data privacy. Again,
+when the data set itself is properly protected by methods approved by the
+_data owner_ this method can be safely applied for data transportation.
+
+In this context the two methods described above can be regarded as equal with
+regard to the degree of data privacy protection.
