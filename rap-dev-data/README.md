@@ -115,7 +115,7 @@ Next time the container are started they will be in their initial states and
 any data payload must be decrypted all over agian.
 
 
-### Adding data payload
+### Add local data to container
 Skip this section if you use a container that has data pre-built. If
 you use the _nodata_ tag of this container and have requested and been provided
 with the file _payload.tar.gz_, please read on.
@@ -162,13 +162,14 @@ the RStudio terminal tab and run the init script:
 You will be prompted for the password to your private key used for decryption
 and root password for your mysql database. The latter is by default set to
 "root". Please note that use of shiny-server in this container may also depend
-on configuration provided through this init-script. Therefore, make sure to run
-it first every time the container is started in its initial state. 
+on configuration provided through this init-script. Therefore, every time this
+container is started at its initial state please run this script before you
+start your work. 
 
 ### Behind a proxy
 Use of this container behind a proxy server tend to complicate things
 slightly. In summary, the proxy settings must be pre-built into the image
-that is used to provie you with the RStudio container. The below 3 steps will
+that is used to provide you with the RStudio container. The below 3 steps will
 help you get up and running with a develoment environment that reflects your
 proxy server settings.
 
