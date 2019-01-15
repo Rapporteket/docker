@@ -130,7 +130,7 @@ GitHub:
 git clone https://github.com/Rapporteket/docker.git
 ```
 
-#### Step 2: Edit the docker files
+#### Step 2: Edit the _Dockerfile_
 Move into the directory _docker/rap-dev-data_. In _Dockerfile_ un-comment the
 line
 ```bash
@@ -139,10 +139,36 @@ line
 by removing the "#" at the start of the line. Then, save and exit.
 
 #### Step 3: Build the container
-Move the file _payload.tar.gz_ into the same directory as _Dockerfile_. Then,
-from the same directory, build the container:
+Move the file _payload.tar.gz_ into the same directory as _Dockerfile_. Clean
+up docker leftovers from previous builds to ensure you build a clean image:
 ```bash
-docker build -t rap-dev-data .
+docker system prune --all --volumes --force
+```
+
+Then, from the same directory, build the container:
+```bash
+docker build --no-cache --pull --force-rm -t rap-dev-data .
+```
+It will take some  time to pull and extract images all over again so please be
+patient.
+
+Edit the _docker-compose.yml_ file to make sure you use your newly built local
+image instead of the one from dockerhub containing no data. Under the "dev"
+section change from "image: areedv/rap-dev-data:nodata" to
+"image: rap-dev-data". After editing, the relevant part of _docker-compose.yml_
+should look like this:
+```bash
+...
+   dev:
+     depends_on:
+       - db
+     image: rap-dev-data
+...
+```
+
+Afterwards, start your container again:
+```bash
+docker-compose up
 ```
 
 ### Initializing container data
@@ -269,14 +295,16 @@ _user_ follow the reverse hybrid scheme: the encrypted symmetric key is
 decrypted applying the corresponding private key and then the decrypted
 symmetric key is used to decrypt the data set itself.
 
-Method of encryption consists of generating a randomized 256 bit key. This key
-is then used to encrypt data following the
-[Advance Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard). The recipients public key is collected from his/hers user account
+Method of encryption consists of generating a randomized 256 bit key every time
+data is to be encrypted. This key is then used to encrypt data following the
+[Advance Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
+The recipients public key is collected from his/hers user account
 at GitHub and used to asymmetrically encrypt the symmetric key. The
-encrypted data and encrypted key is then shipped to the resipient.
+encrypted data and encrypted key is then shipped to the recipient.
 
-This scheme ensures that data privacy are sufficiently protected (ref) and that
-decryption only can be performed by the recipient.
+This scheme ensures that data privacy are protected by [sufficiently strong
+encryption](https://www.keylength.com/) and that decryption only can be
+performed by the recipient.
 
 
 ### Ways of data delivery (transport)
