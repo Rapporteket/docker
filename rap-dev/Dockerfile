@@ -3,13 +3,19 @@ FROM rocker/verse:3.5.0
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_TIME nb_NO.UTF-8
 
-# need this for ssh through proxy?
+# debian extras
 RUN apt-get update && apt-get install -yq \
     apt-utils \
-    #locales \
+    locales \
+    locales-all \
     mysql-client \
     netcat-openbsd \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# System locales
+ENV LANG=nb_NO.UTF-8
+ENV LC_ALL=nb_NO.UTF-8
+RUN echo "LANG=nb_NO.UTF-8" > /etc/default/locale
 
 # making proxy def (and other env vars) go all the way into Rstudio console
 # based on https://github.com/rocker-org/rocker-versioned/issues/91
