@@ -1,4 +1,4 @@
-FROM rap-dev
+FROM areedv/rap-dev:latest
 
 # our own touch to shiny-server
 RUN rm /srv/shiny-server/index.html
@@ -8,5 +8,5 @@ ADD --chown=root:root rapShinyApps.tar.gz /srv/shiny-server/
 
 # add data payload and scripts
 #COPY --chown=rstudio:rstudio payload.tar.gz /home/rstudio/regData/
-COPY --chown=rstudio:rstudio dec.sh /home/rstudio/regData/
-COPY --chown=rstudio:rstudio init.sh /home/rstudio/
+#COPY --chown=rstudio:rstudio dec.sh /home/rstudio/regData/
+#COPY --chown=rstudio:rstudio init.sh /home/rstudio/
