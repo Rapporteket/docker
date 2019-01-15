@@ -55,7 +55,8 @@ proxy environment variables the container image must also contain these
 settings (you will need this for instance if doing things like 
 _install.packages()_ from the RStudio console within the container). This
 requires rebuilding of the docker image and in order to do so you will need the
-_Dockerfile_ which is available from github (this repo):
+_Dockerfile_ which is available from github (this repo). If you havent
+already done so, clone this repository to your own computer:
 ```bash
 git clone https://github.com/Rapporteket/docker.git
 ```
