@@ -208,8 +208,14 @@ The _rap-dev-data_ container depend on _rap-dev_ and since the latter now has
 changed this must also be applied to the _rap-dev-data_ image.
 
 In the previous step the Rapporteket Docker repo was downloaded from GitHub
-(if not, re-visit Step 1). Now, move into the _docker/rap-dev-data_ directory
-and rebuild the _rap-dev-data_ image:
+(if not, re-visit Step 1). Move into the _docker/rap-dev-data_ directory.
+First, make sure to use the local image of _rap-dev_ (that was built in Step 1)
+by changing the _FROM_ directive in the very first line of _Dockerfile_ to
+become:
+```bash
+FROM rap-dev
+```
+Then, from the command line, rebuild the _rap-dev-data_ image:
 ```bash
 docker build -t rap-dev-data .
 ```
