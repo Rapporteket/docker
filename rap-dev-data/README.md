@@ -300,7 +300,9 @@ data is to be encrypted. This key is then used to encrypt data following the
 [Advance Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
 The recipients public key is collected from his/hers user account
 at GitHub and used to asymmetrically encrypt the symmetric key. The
-encrypted data and encrypted key is then shipped to the recipient.
+encrypted data and encrypted key is then shipped to the recipient. For
+practial implementation of encryption and decryption as describe above the
+[OpenSSL cryptography library](https://www.openssl.org/) is applied.
 
 This scheme ensures that data privacy are protected by [sufficiently strong
 encryption](https://www.keylength.com/) and that decryption only can be
