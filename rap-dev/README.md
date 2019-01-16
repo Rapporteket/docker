@@ -58,7 +58,7 @@ requires rebuilding of the docker image and in order to do so you will need the
 _Dockerfile_ which is available from github (this repo). If you havent
 already done so, clone this repository to your own computer:
 ```bash
-git clone https://github.com/Rapporteket/docker.git
+git clone https://github.com/Rapporteket/docker.git --config core.autocrlf=input
 ```
 Move into the directory _docker/rap-dev_ and rebuild the container with the 
 _PROXY_ build argument:

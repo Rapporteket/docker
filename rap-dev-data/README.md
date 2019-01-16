@@ -127,7 +127,7 @@ re-build the container according to the following three steps:
 If you havent done so already, clone the _docker_ project from Rapporteket at
 GitHub:
 ```bash
-git clone https://github.com/Rapporteket/docker.git
+git clone https://github.com/Rapporteket/docker.git --config core.autocrlf=input
 ```
 
 #### Step 2: Edit the _Dockerfile_
