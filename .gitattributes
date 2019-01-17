@@ -1,0 +1,4 @@
+# Users may mix content on their hosts (any os) with containers (debian).
+# To avoid problems caused by how different os-es deal with line endings,
+# enforce plain line feed (LF) on every text file.
+* text eol=lf
