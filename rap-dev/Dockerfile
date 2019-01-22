@@ -1,4 +1,4 @@
-FROM rocker/verse:3.5.0
+FROM rocker/verse:3.5.1
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_TIME nb_NO.UTF-8
