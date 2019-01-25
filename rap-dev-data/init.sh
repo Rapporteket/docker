@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# only run if mount of ssh-files to /tmp/.ssh is requested (in 'run' or
+# 'compose')
+
+if [ -d /tmp/.ssh ]; then
+  echo "Copy and chmod ssh key files..."
+  cp -R /tmp/.ssh /home/rstudio/.ssh
+  chmod 700 /home/rstudio/.ssh
+  chmod 600 /home/rstudio/.ssh/*
+  chmod 644 /home/rstudio/.ssh/*.pub
+  echo ""
+fi
+
 # move into data dir
 echo "Moving into data directory..."
 cd regData
