@@ -71,9 +71,11 @@ public key collected from github. If you have registred more than one public
 key at github the first one is used. To decrypt the data payload the
 corresponding private key must be made available to the *dev* container.
 One way of doing this is by mounting the directory containing your private key
-as a volume in the container. On linux systems a users private key is usually
-found in the *~/.ssh* directory and the corresponding entry in
-*docker-compose.yml* is shown below:
+as a volume in the container.
+
+#### On linux (and probably also mac, but not tested)
+If you use a linux-type os your ssh keys ar usually found in the *~/.ssh*
+directory and the corresponding entry in *docker-compose.yml* is shown below:
 ```yaml
 ...
   dev:
@@ -86,8 +88,27 @@ where all after the ":" defines the mount point within the container. Please
 adjust the part before the ":" according to where your private key is stored
 on the host.
 
-Then, start up the  containers. For a linux type host navigate to the
-directory holding your *docker-compose.yml* file and start by running:
+#### On Windows
+If you use Windows and to ensure the correct permissions of your ssh
+keys used within the container the mount point is different from that of linux
+(and probably mac). Assuming your ssh keys are stored in the
+*C:\\Users\\[username]\\.ssh* directory (replace *[username]* with your actual
+username) the corresponding entry in *docker-compose.yml* is shown below:
+```yaml
+...
+  dev:
+  ...
+  volumes:
+    - C:/Users/[username]/.ssh:/tmp/.ssh
+  ...
+```
+where all after the ":" defines the mount point within the container. Please
+adjust the part before the ":" according to where your ssh keys are stored on
+the host. Initialization of the container will make sure your keys are copied
+to the right place within the container and to adjust permissions accordingly.
+
+Then, start up the  containers. Navigate to the directory holding your
+*docker-compose.yml* file and start by running:
 ```bash
 docker-compose up
 ```
