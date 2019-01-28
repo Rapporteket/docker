@@ -13,7 +13,7 @@ services:
        - db
      image: areedv/rap-dev-data:nodata
      volumes:
-       - ~/.ssh:/home/rstudio/.ssh
+       - ~/.ssh:/tmp/.ssh
        - ~/.gitconfig:/home/rstudio/.gitconfig
      ports:
        - "8787:8787"
