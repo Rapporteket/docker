@@ -40,7 +40,7 @@ ENV ROOT=TRUE
 RUN export ADD=shiny && bash /etc/cont-init.d/add
 
 ## provide user shiny with corresponding environmental settings
-RUN touch /home/rstudio/.Renviron
+RUN touch /home/shiny/.Renviron
 RUN echo "http_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "https_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/shiny/.Renviron
