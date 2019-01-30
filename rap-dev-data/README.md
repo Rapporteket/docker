@@ -218,31 +218,33 @@ docker build --no-cache --pull --force-rm -t rap-dev-data .
 ```
 
 ##### Alternative B: with proxy
-Make sure you know the *address* and *port number* of your proxy server which
-will be on the form similar to _http://my-proxy.domain.no:8080_ or
-_http://[your.proxy.ip]:8080_ where the address and
-port number are separated by ":". If you do not know what address and port
+Make sure you know the *IP address* and *port number* of your proxy server which
+will be on the form similar to _http://192.168.0.1:8080_ where the IP address
+and port number are separated by ":". If you do not know what address and port
 number to use, ask IT support staff or a system administrator. Assuming that
 the container to be built is to
 be run locally (on the same computer building it) the same proxy settings will
 also apply to the docker software running on your computer. The docker software
 may be able to read global proxy settings for your system and in that case you
-will be ready to proceed. If not, you will also have to configure your docker
-software to reflect your system settings by adding the following (json) entry
-to the file _config.json_:
-```json
-{
-  "proxies": {
-    "default": {
-      "httpProxy": "[your.proxy.ip]:[your_proxy_port_number]",
-      "httpsProxy": "[your.tls-proxy.ip]:[your_proxy_port_number]",
-      "noProxy": "test.site1.com,*.site2.com,*.site3.com"
-    }
-  }
-}
+will be ready to proceed. If not, you might end up getting "connection refused"
+while trying to pull images during build. Then, you will also have to configure
+your docker software to reflect your system settings by altering configuration
+of the docker daemon. On linux (and maybe also similar on other systems, but
+not tested), open the file _/etc/default/docker_ and fill in your proxy server
+settings (requires root privileges):
+```bash
+...
+# If you need Docker to use an HTTP proxy, it can also be specified here.
+export http_proxy="http://192.168.0.1:8080/"
+export https_proxy="http://192.168.0.1:8080/"
+...
 ```
-replacing IPs and port numbers to reflect your set-up. On a linux type os
-this file is found under your home directory, _e.g._ _~/.docker/config.json_.
+For this to take effect the docker daemon needs to be restarted. On linux
+(again, not yet tested for other systems) run the following command (also
+requires root privileges):
+```bash
+sudo service docker restart
+```
 
 Then, build a local image  with proxy definition:
 ```bash
