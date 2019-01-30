@@ -248,7 +248,7 @@ sudo service docker restart
 
 Then, build a local image  with proxy definition:
 ```bash
-docker build --no-cache --pull --force-rm --build-arg PROXY=http://my-proxy.domain.no:8080 -t rap-dev-data .
+docker build --no-cache --pull --force-rm --build-arg PROXY=http://192.168.0.1:8080 -t rap-dev-data .
 ```
 
 After performing one of the two above alternative builds edit the 
