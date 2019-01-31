@@ -338,25 +338,27 @@ and a practical relation prior to any exchange of data.
 ### <a name="tech"></a>Technical measures
 A data set to be used in conjunction with this docker container is encrypted
 by the _provider_ following a hybrid scheme: the data is encrypted applying a
-disposable symmetric key and this key is in turn asymetrically encrypted using
-a public key provided by the _user_ (resipient of data). Here, the term
-"hybrid" referes to that both symmetric an asymmetric encrytion is performed,
-and the term
-"disposable" means that the symmetric key will only be applied once and never
-re-used for encryption of data. The public key is assosiated with a
-corresponding private key that is kept secret and only accessible by the person
-owning it (in contrast to the public key that can be shared freely). The 
-_provider_
+[symmetric key algorithm](https://en.wikipedia.org/wiki/Symmetric-key_algorithm)
+using a disposable key. This key is in turn encrypted using
+[public-key cryptography](https://en.wikipedia.org/wiki/Public-key_cryptography)
+with a public key provided by the _user_ (resipient of data). Here, the term
+"hybrid" referes to that both symmetric an asymmetric encrytion systems are
+used, and the term
+"disposable" means that the key used for in the symmetric key algorithm will
+only be applied once and never re-used for encryption of data. The public key is
+assosiated with a corresponding private key that is kept secret and only
+accessible by the person owning it (in contrast to the public key that can be
+shared freely). The _provider_
 then deliver the encrypted data to the _user_. After receiving the data the
-_user_ follow the reverse hybrid scheme: the encrypted symmetric key is
-decrypted applying the corresponding private key and then the decrypted
+_user_ follow the reverse hybrid scheme: the encrypted "symmetric key" is
+decrypted applying the _users_ private key and then the decrypted
 symmetric key is used to decrypt the data set itself.
 
 Method of encryption consists of generating a randomized 256 bit key every time
 data is to be encrypted. This key is then used to encrypt data following the
 [Advance Encryption Standard](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard).
 The recipients public key is collected from his/hers user account
-at GitHub and used to asymmetrically encrypt the symmetric key. The
+at GitHub and used to asymmetrically encrypt the "symmetric key". The
 encrypted data and encrypted key is then shipped to the recipient. For
 practial implementation of encryption and decryption as describe above the
 [OpenSSL cryptography library](https://www.openssl.org/) is applied.
