@@ -278,20 +278,6 @@ After the startup process RStudio will be accessible navigating your browser to
 "rstudio" and password "password". To access shiny-server navigate your
 browser to [localhost:3838](http://localhost:3838) (no password needed).
 
-### Stop containers
-Using the above start up command pres ```ctrl + c``` to stop the containers.
-Docker will save the state of your containers and any data that you've been
-working on will still be there once you start your containers the next time.
-For the security of your data this migth not be desirable. In that case it is
-recommended to remove your containers (but keeping the initial images) by
-running the following command after the containers have been stopped:
-```bash
-docker rm -vf $(docker ps -a -q)
-```
-
-After running this command and the next time the containers are started they
-will be in their initial states (as built).
-
 
 ### Initializing container data
 At its initial state _rap-dev-data_ holds data in an encrypted form and this
@@ -311,6 +297,22 @@ and root password for your mysql database. The latter is by default set to
 on configuration provided through this init-script. Therefore, every time this
 container is started at its initial state please run this script before you
 start your work. 
+
+
+### Stop containers
+Using the above start up command pres ```ctrl + c``` to stop the containers.
+Docker will save the state of your containers and any data that you've been
+working on will still be there once you start your containers the next time.
+For the security of your data this migth not be desirable. In that case it is
+recommended to remove your containers (but keeping the initial images) by
+running the following command after the containers have been stopped:
+```bash
+docker rm -vf $(docker ps -a -q)
+```
+
+After running this command and the next time the containers are started they
+will be in their initial states (as built).
+
 
 ## Data protection
 Getting the most out of the _rap-dev-data_ container depend on the availablity
