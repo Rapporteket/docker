@@ -60,6 +60,10 @@ mv rapbaseConfig.yml $R_RAP_CONFIG_PATH
 mv dbConfig.yml $R_RAP_CONFIG_PATH
 echo ""
 
+# make odbc data source file
+echo "Making .odbc.ini from config"
+sed 's/ : / = /g;s/:/]/g;/#/d;s/host/SERVER/g;s/name/DATABASE/g;s/user/USER/g;s/pass/PASSWORD/g;s/disp/Description/g;s/^[A-Za-z]/[&/;s/^\s*//g;/^\[/aDriver = MariaDB Driver' $R_RAP_CONFIG_PATH/dbConfig.yml > .odbc.ini
+
 # clean-up
 echo "Cleaning up"
 rm -f dump.sql key key.enc payload.*
