@@ -60,7 +60,7 @@ mv rapbaseConfig.yml $R_RAP_CONFIG_PATH
 mv dbConfig.yml $R_RAP_CONFIG_PATH
 echo ""
 
-# celan-up
+# clean-up
 echo "Cleaning up"
 rm -f dump.sql key key.enc payload.*
 echo ""
