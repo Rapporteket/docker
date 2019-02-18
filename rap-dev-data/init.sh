@@ -62,10 +62,13 @@ echo ""
 
 # make odbc data source file
 echo "Making .odbc.ini from config"
-sed 's/ : / = /g;s/:/]/g;/#/d;s/host/SERVER/g;s/name/DATABASE/g;s/user/USER/g;s/pass/PASSWORD/g;s/disp/Description/g;s/^[A-Za-z]/[&/;s/^\s*//g;/^\[/aDriver = MariaDB Driver' $R_RAP_CONFIG_PATH/dbConfig.yml > .odbc.ini
+cd
+sed 's/ : / = /g;s/:/]/g;/#/d;s/^\s*host/  SERVER/g;s/^\s*name/  DATABASE/g;s/^\s*user/  USER/g;s/^\s*pass/  PASSWORD/g;s/^\s*disp/  Description/g;s/^[A-Za-z]/[&/;s/^\s*//g;/^\[/aDriver = MariaDB Driver' $R_RAP_CONFIG_PATH/dbConfig.yml > .odbc.ini
+echo ""
 
 # clean-up
 echo "Cleaning up"
+cd regData
 rm -f dump.sql key key.enc payload.*
 echo ""
 
