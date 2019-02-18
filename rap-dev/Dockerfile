@@ -10,7 +10,16 @@ RUN apt-get update && apt-get install -yq \
     locales-all \
     mysql-client \
     netcat-openbsd \
+    tzdata \
+    unixodbc \
+    unixodbc-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# experimenting on mariadb odbc driver not found in debian 9 repo...
+#COPY libmaodbc.so /usr/lib/x86_64-linux-gnu/odbc/
+ADD https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.0.8/mariadb-connector-odbc-3.0.8-ga-debian-x86_64.tar.gz /tmp
+RUN tar xvzf /tmp/mariadb-connector-odbc-3.0.8-ga-debian-x86_64.tar.gz --directory /tmp
+RUN cp /tmp/lib/libmaodbc.so /usr/lib/x86_64-linux-gnu/odbc/
 
 # System locales
 ENV LANG=nb_NO.UTF-8
@@ -45,6 +54,9 @@ RUN echo "http_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "https_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/shiny/.Renviron
+
+# Install odbc package from github
+RUN R -e "devtools::install_github('r-dbi/odbc')"
 
 # Install base Rapporteket packages in R 
 RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
