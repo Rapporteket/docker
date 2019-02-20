@@ -1,4 +1,4 @@
-FROM rap-dev:latest
+FROM areedv/rap-dev:latest
 
 # our own touch to shiny-server
 RUN rm /srv/shiny-server/index.html
