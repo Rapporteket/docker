@@ -3,6 +3,8 @@
 # only run if mount of ssh-files to /tmp/.ssh is requested (in 'run' or
 # 'compose')
 
+echo ""
+
 if [ -d /tmp/.ssh ]; then
   echo "Copy and chmod ssh key files..."
   cp -R /tmp/.ssh /home/rstudio/.ssh
