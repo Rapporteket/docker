@@ -33,7 +33,7 @@ The _--rm_ option removes the container when the session is terminated
 
 ### Behind a proxy
 Depending on your environment and usecases being behind a proxy server might
-cause minor or even major problems. One or both of the blow steps might
+cause minor or even major problems. One or both of the below steps might
 help you get going.
 
 To make the docker client aware of your proxy add the following to your json
