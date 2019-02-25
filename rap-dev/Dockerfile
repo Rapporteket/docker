@@ -23,7 +23,7 @@ RUN cp /tmp/lib/libmaodbc.so /usr/lib/x86_64-linux-gnu/odbc/
 # System locales
 ENV LANG=nb_NO.UTF-8
 ENV LC_ALL=nb_NO.UTF-8
-RUN echo "LANG=nb_NO.UTF-8" > /etc/default/locale
+RUN echo "LANG=\"nb_NO.UTF-8\"" > /etc/default/locale
 
 # making proxy def (and other env vars) go all the way into Rstudio
 # console, based on
