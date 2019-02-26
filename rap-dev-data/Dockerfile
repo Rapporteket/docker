@@ -1,4 +1,4 @@
-FROM areedv/rap-dev:latest
+FROM rap-dev
 
 # our own touch to shiny-server
 RUN rm /srv/shiny-server/index.html
@@ -7,7 +7,7 @@ RUN usermod -a -G staff shiny
 ADD --chown=root:root rapShinyApps.tar.gz /srv/shiny-server/
 
 # add data payload, scripts and settings
-#COPY --chown=rstudio:rstudio payload.tar.gz /home/rstudio/regData/
+COPY --chown=rstudio:rstudio payload.tar.gz /home/rstudio/regData/
 COPY --chown=rstudio:rstudio dec.sh /home/rstudio/regData/
 COPY --chown=rstudio:rstudio init.sh /home/rstudio/
 COPY --chown=rstudio:rstudio odbcinst.ini /home/rstudio/.odbcinst.ini
@@ -39,3 +39,4 @@ RUN echo "http_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "https_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/shiny/.Renviron
+RUN echo "LANG=nb_NO.UTF-8" >> /home/shiny/.Renviron

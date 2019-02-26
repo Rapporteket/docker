@@ -15,6 +15,9 @@ RUN apt-get update && apt-get install -yq \
     unixodbc-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+# testing: shiny-server just do not get anything but locale C
+RUN locale-gen nb_NO.UTF-8
+
 # experimental add mariadb odbc driver not found in debian 9 repo...
 ADD https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.0.8/mariadb-connector-odbc-3.0.8-ga-debian-x86_64.tar.gz /tmp
 RUN tar xvzf /tmp/mariadb-connector-odbc-3.0.8-ga-debian-x86_64.tar.gz --directory /tmp
@@ -54,6 +57,7 @@ RUN echo "http_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "https_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/shiny/.Renviron
+
 
 # Install odbc package from github
 RUN R -e "devtools::install_github('r-dbi/odbc')"
