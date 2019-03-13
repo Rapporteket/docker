@@ -3,7 +3,7 @@ FROM areedv/rap-dev:latest
 # our own touch to shiny-server
 RUN rm /srv/shiny-server/index.html
 RUN rm -rf /srv/shiny-server/sample-apps
-RUN usermod -a -G staff shiny
+RUN usermod -a -G staff,rstudio shiny
 ADD --chown=root:root rapShinyApps.tar.gz /srv/shiny-server/
 
 # add data payload, scripts and settings

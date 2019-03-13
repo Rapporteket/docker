@@ -58,6 +58,7 @@ echo ""
 # insert Rapporteket config
 echo "Inserting config"
 mkdir -p $R_RAP_CONFIG_PATH
+chmod ug+rwx $R_RAP_CONFIG_PATH
 mv rapbaseConfig.yml $R_RAP_CONFIG_PATH
 mv dbConfig.yml $R_RAP_CONFIG_PATH
 echo ""
