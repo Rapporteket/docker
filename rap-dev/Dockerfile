@@ -6,6 +6,14 @@ ENV LC_TIME nb_NO.UTF-8
 # debian extras
 RUN apt-get update && apt-get install -yq \
     apt-utils \
+    texlive-lang-european \
+    texlive-latex-recommended \
+    biber \
+    texlive-bibtex-extra \
+    texlive-latex-extra \
+    texlive-science \
+    texlive-fonts-recommended \
+    texlive-font-utils \
     locales \
     locales-all \
     mysql-client \
