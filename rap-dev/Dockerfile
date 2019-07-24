@@ -6,14 +6,6 @@ ENV LC_TIME nb_NO.UTF-8
 # debian extras
 RUN apt-get update && apt-get install -yq \
     apt-utils \
-    texlive-lang-european \
-    texlive-latex-recommended \
-    biber \
-    texlive-bibtex-extra \
-    texlive-latex-extra \
-    texlive-science \
-    texlive-fonts-recommended \
-    texlive-font-utils \
     locales \
     locales-all \
     mysql-client \
@@ -73,3 +65,10 @@ RUN R -e "devtools::install_github('r-dbi/odbc')"
 # Install base Rapporteket packages in R 
 RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
 RUN R -e "devtools::install_github('Rapporteket/raptools')"
+
+# tinytex maybe not so fully automtaic...
+RUN usermod -a -G staff,rstudio shiny
+USER shiny
+RUN R -e "tinytex::tlmgr_install('collection-langeuropean')"
+
+USER root
