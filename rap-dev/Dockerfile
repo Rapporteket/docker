@@ -19,9 +19,9 @@ RUN apt-get update && apt-get install -yq \
 RUN locale-gen nb_NO.UTF-8
 
 # experimental add mariadb odbc driver not found in debian 9 repo...
-ADD https://downloads.mariadb.com/Connectors/odbc/connector-odbc-3.0.8/mariadb-connector-odbc-3.0.8-ga-debian-x86_64.tar.gz /tmp
-RUN tar xvzf /tmp/mariadb-connector-odbc-3.0.8-ga-debian-x86_64.tar.gz --directory /tmp
-RUN cp /tmp/lib/libmaodbc.so /usr/lib/x86_64-linux-gnu/odbc/
+ADD https://downloads.mariadb.com/Connectors/odbc/connector-odbc-2.0.15/mariadb-connector-odbc-2.0.15-ga-debian-x86_64.tar.gz /tmp
+RUN tar xvzf /tmp/mariadb-connector-odbc-2.0.15-ga-debian-x86_64.tar.gz --directory /tmp
+RUN cp /tmp/mariadb-connector-odbc-2.0.15-ga-debian-x86_64/lib/libmaodbc.so /usr/lib/x86_64-linux-gnu/odbc/
 
 # System locales
 ENV LANG=nb_NO.UTF-8
