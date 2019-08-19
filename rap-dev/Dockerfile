@@ -63,7 +63,7 @@ RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/shiny/.Renviron
 RUN R -e "devtools::install_github('r-dbi/odbc')"
 
 # Install base Rapporteket packages in R 
-RUN R -e "devtools::install_github('Rapporteket/rapbase', ref='rel')"
+RUN R -e "install.packages('rapbase')"
 RUN R -e "devtools::install_github('Rapporteket/raptools')"
 
 # tinytex maybe not so fully automtaic...
