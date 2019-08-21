@@ -366,8 +366,9 @@ practial implementation of encryption and decryption as describe above the
 [OpenSSL cryptography library](https://www.openssl.org/) is applied.
 
 This scheme ensures that data privacy are protected by [sufficiently strong
-encryption](https://www.keylength.com/) and that decryption only can be
-performed by the recipient.
+encryption](https://www.keylength.com/) also along the lines of the
+[recommendations by the Norwegian National Security Authority](https://www.nsm.stat.no/globalassets/dokumenter/veiledninger/systemteknisk-sikkerhet/nsm-cryptographic-recommendations-juli19.pdf)
+and that decryption only can be performed by the recipient.
 
 
 ### Ways of data delivery (transport)
