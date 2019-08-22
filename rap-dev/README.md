@@ -1,7 +1,7 @@
 # R development environment for Rapporteket
-[![](https://img.shields.io/docker/automated/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/rap-dev/builds/)
-[![](https://img.shields.io/docker/build/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/rap-dev/builds/)
-[![](https://img.shields.io/docker/pulls/areedv/rap-dev.svg)](https://hub.docker.com/r/areedv/rap-dev)
+[![](https://img.shields.io/docker/automated/rapporteket/rap-dev.svg)](https://hub.docker.com/r/rapporteket/rap-dev/builds/)
+[![](https://img.shields.io/docker/build/rapporteket/rap-dev.svg)](https://hub.docker.com/r/rapporteket/rap-dev/builds/)
+[![](https://img.shields.io/docker/pulls/rapporteket/rap-dev.svg)](https://hub.docker.com/r/rapporteket/rap-dev)
 
 
 ## Introduction
