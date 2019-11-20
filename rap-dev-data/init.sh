@@ -58,9 +58,19 @@ echo ""
 # insert Rapporteket config
 echo "Inserting config"
 mkdir -p $R_RAP_CONFIG_PATH
-chmod ug+rwx $R_RAP_CONFIG_PATH
+chmod ugo+rwx $R_RAP_CONFIG_PATH
 mv rapbaseConfig.yml $R_RAP_CONFIG_PATH
 mv dbConfig.yml $R_RAP_CONFIG_PATH
+echo ""
+
+# make sure files can be used for both 'rstudio' and 'shiny' users
+echo "Creating template files and adjusting privileges"
+cd $R_RAP_CONFIG_PATH
+touch appLog.csv reportLog.csv
+chmod ugo+rw *
+mkdir autoReportBackup
+chmod ugo+rwx autoReportBackup
+cd ~
 echo ""
 
 # make odbc data source file
