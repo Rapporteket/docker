@@ -3,5 +3,5 @@
 # enforce plain line feed (LF) on every text file.
 * text eol=lf
 
-# Bever modify line endings on our tar archoves
-*.tar.gz -crlf
+# Never modify line endings on binary files, in particular our tar archives
+*.tar.gz binary
