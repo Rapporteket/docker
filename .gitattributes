@@ -2,3 +2,6 @@
 # To avoid problems caused by how different os-es deal with line endings,
 # enforce plain line feed (LF) on every text file.
 * text eol=lf
+
+# Bever modify line endings on our tar archoves
+*.tar.gz -crlf
