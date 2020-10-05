@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -yq \
     apt-utils \
     locales \
     locales-all \
-    mysql-client \
+    default-mysql-client \
     netcat-openbsd \
     tzdata \
     unixodbc \
