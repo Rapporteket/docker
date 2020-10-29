@@ -59,13 +59,18 @@ RUN echo "https_proxy=${PROXY}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/shiny/.Renviron
 RUN echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/shiny/.Renviron
 
+# basic R functionality
+RUN R -e "install.packages(c('remotes'), repos='https://cloud.r-project.org/')"
 
 # Install odbc package from github
-RUN R -e "devtools::install_github('r-dbi/odbc')"
+RUN R -e "remotes::install_github('r-dbi/odbc')"
 
-# Install base Rapporteket packages in R 
-RUN R -e "install.packages('rapbase')"
-RUN R -e "devtools::install_github('Rapporteket/raptools')"
+# install package dependencies
+RUN R -e "install.packages(c('covr', 'dplyr', 'kableExtra', 'knitr', 'lintr', 'magrittr', 'revealjs', 'shiny', 'shinyalert', 'shinycssloaders', 'testthat'))"
+
+RUN R -e "remotes::install_github(c('Rapporteket/rapbase@*release', 'Rapporteket/raplog@*release'))"
+# Install base Rapporteket packages in R
+RUN R -e "remotes::install_github(c('Rapporteket/rapbase@*release', 'Rapporteket/raplog@*release'))"
 
 # tinytex maybe not so fully automtaic...
 RUN usermod -a -G staff,rstudio shiny
