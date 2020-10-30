@@ -12,6 +12,15 @@ if [ -d /tmp/.ssh ]; then
   chmod 600 /home/rstudio/.ssh/*
   chmod 644 /home/rstudio/.ssh/*.pub
   echo ""
+  echo "Converting ssh private key to ensure PEM format. Please hold your "
+  echo "private key passwords ready (if any)."
+  echo "Please note that this will only alter the private key inside the"
+  echo "container and not your docker host source key."
+  echo ""
+  cd ~/.ssh
+  ssh-keygen -f id_rsa -e -m pem -p
+  cd ~/.
+  echo ""
 fi
 
 # move into data dir
