@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -yq \
     tzdata \
     unixodbc \
     unixodbc-dev \
+    libgit2-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # testing: shiny-server just do not get anything but locale C
