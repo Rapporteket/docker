@@ -1,4 +1,4 @@
-FROM rocker/verse:latest
+FROM rocker/verse:3.6.3
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LC_TIME nb_NO.UTF-8
@@ -69,9 +69,8 @@ RUN R -e "remotes::install_github('r-dbi/odbc')"
 # install package dependencies
 RUN R -e "install.packages(c('covr', 'dplyr', 'kableExtra', 'knitr', 'lintr', 'magrittr', 'revealjs', 'shiny', 'shinyalert', 'shinycssloaders', 'testthat'))"
 
-RUN R -e "remotes::install_github(c('Rapporteket/rapbase@*release', 'Rapporteket/raplog@*release'))"
 # Install base Rapporteket packages in R
-RUN R -e "remotes::install_github(c('Rapporteket/rapbase@*release', 'Rapporteket/raplog@*release'))"
+RUN R -e "remotes::install_github(c('Rapporteket/rapbase@*release'))"
 
 # tinytex maybe not so fully automtaic...
 RUN usermod -a -G staff,rstudio shiny
