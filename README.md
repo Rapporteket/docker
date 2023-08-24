@@ -22,10 +22,10 @@ an
 Shiny-Server to test your apps and a database server that can host
 the data you will be developing upon, this docker container will be your
 choice. Please navigate
-[here](https://github.com/Rapporteket/docker/tree/master/rap-dev-data).
+[here](https://github.com/Rapporteket/docker/tree/main/rap-dev-data).
 
 ## Development environment for Rapporteket
 Same as above, but without a database server. Mainly used as a fundament for
 the above, but if you want to make your own twist please file free to use it.
 Please navigate
-[here](https://github.com/Rapporteket/docker/tree/master/rap-dev)
+[here](https://github.com/Rapporteket/docker/tree/main/rap-dev)

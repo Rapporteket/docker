@@ -2,9 +2,9 @@
 
 ## Introduction
 The 
-[docker-compose.yml file](https://github.com/Rapporteket/docker/blob/master/rap-dev-data/docker-compose.yml)
+[docker-compose.yml file](https://github.com/Rapporteket/docker/blob/main/rap-dev-data/docker-compose.yml)
 combines the 
-[R development environment for Rapporteket](https://github.com/Rapporteket/docker/tree/master/rap-dev)
+[R development environment for Rapporteket](https://github.com/Rapporteket/docker/tree/main/rap-dev)
 and a
 [docker mysql image](https://hub.docker.com/_/mysql/)
 to form a development environment where data also can
@@ -56,9 +56,9 @@ start of each section a small piece of text is provided to help you
 decide if the case in question do apply or, if not, can be skipped. And please,
 do not worry! If you have it wrong, just start over again. Every adjustment
 you make will be done in either of the files
-[docker-compose.yml](https://github.com/Rapporteket/docker/blob/master/rap-dev-data/docker-compose.yml)
+[docker-compose.yml](https://github.com/Rapporteket/docker/blob/main/rap-dev-data/docker-compose.yml)
 or
-[Dockerfile](https://github.com/Rapporteket/docker/blob/master/rap-dev-data/Dockerfile).
+[Dockerfile](https://github.com/Rapporteket/docker/blob/main/rap-dev-data/Dockerfile).
 Likely, both will come in handy, so you might as well download them right away
 (along with rest of the repository):
 ```bash
