@@ -48,7 +48,7 @@ RUN touch /home/coder/.Renviron \
     && R -e "install.packages(c('remotes', 'devtools', 'tinytex', 'languageserver'), lib = '/home/coder/R/library')" \
     && R -e "remotes::install_github('Rapporteket/rapbase@*release', lib = '/home/coder/R/library')" \
     && R -e "tinytex::install_tinytex()" \
-    && export PATH=~/bin:$PATH \
+    && export PATH="$HOME/bin:$PATH" \
     && tlmgr update --self --all \
     && tlmgr install \
         amsmath \
