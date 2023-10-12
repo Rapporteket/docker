@@ -45,7 +45,7 @@ RUN touch /home/coder/.Renviron \
     && echo "R_RAP_CONFIG_PATH=${R_RAP_CONFIG_PATH}" >> /home/coder/.Renviron \
     && code-server --install-extension reditorsupport.r \
     && mkdir -p /home/coder/R/library \
-    && R -e "install.packages(c('remotes', 'devtools', 'tinytex', 'languageserver'), lib = '/home/coder/R/library')" \
+    && R -e "install.packages(c('remotes', 'devtools', 'tinytex', 'languageserver', 'jose'), lib = '/home/coder/R/library')" \
     && R -e "remotes::install_github('Rapporteket/rapbase@*release', lib = '/home/coder/R/library')" \
     && R -e "tinytex::install_tinytex()" \
     && export PATH="$HOME/bin:$PATH" \
