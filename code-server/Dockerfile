@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 USER 1000
 
-ARG R_LIBS_USER=/home/coder/R/library
+ARG R_LIBS_USER=/home/coder/.config/R/library:/home/coder/R/library
 ENV R_LIBS_USER=${R_LIBS_USER}
 
 ARG R_RAP_CONFIG_PATH=/home/coder/.config/rap_config
