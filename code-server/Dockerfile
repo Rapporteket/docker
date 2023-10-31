@@ -1,5 +1,7 @@
 FROM codercom/code-server:4.18.0
 
+WORKDIR /home/coder
+
 ARG GH_PAT
 ENV GITHUB_PAT=${GH_PAT}
 
@@ -33,6 +35,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 USER 1000
+
+COPY .config/code-server-settings.json ./.local/share/code-server/User/settings.json
 
 ARG R_LIBS_USER=/home/coder/.config/R/library:/home/coder/R/library
 ENV R_LIBS_USER=${R_LIBS_USER}
