@@ -21,7 +21,7 @@ jobs:
       matrix:
         config:
           - {name: code-server}
-    name: Build and deploy rapporteket/${{ matrix.config.name }} image
+    name: ${{ matrix.config.name }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4.1.1
