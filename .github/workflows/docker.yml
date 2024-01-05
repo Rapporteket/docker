@@ -15,20 +15,25 @@ concurrency:
 
 jobs:
   push_to_registries:
-    name: Push Docker image to docker hub
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: code-server}
+    name: Build and deploy rapporteket/${{ matrix.config.name }} image
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4.1.1
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: "code-server/Dockerfile"
+          dockerfile: "${{ matrix.config.name }}/Dockerfile"
       - name: Prepare tags
         id: docker_meta
         uses: docker/metadata-action@v5.0.0
         with:
-          images: rapporteket/code-server
+          images: rapporteket/${{ matrix.config.name }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -45,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v5.0.0
         with:
           context: .
-          file: ./code-server/Dockerfile
+          file: ./${{ matrix.config.name }}/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
