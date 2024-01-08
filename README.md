@@ -1,19 +1,19 @@
 # Introduction
+
 This is a repository containing Docker files for containers relevant for
 Rapporteket.
 
 If you do not know what containers are you can read more about it
-[here](https://www.cio.com/article/2924995/software/what-are-containers-and-why-do-you-need-them.html) and
-[here](https://en.wikipedia.org/wiki/Operating-system-level_virtualization#cite_note-1)
-.
-
-[Docker](https://www.docker.com/) is one way of using appliation containers.
-Going down that path, [this](https://docs.docker.com/get-started/) is a nice
-place to get started.
+[here](https://docs.docker.com/get-started/).
 
 # Content
+
 Contents are found in the sub-directories of this repository. A short summary is
 provided below.
+
+## code-server
+
+A docker image containing R and the IDE [Visual Studio Code](https://code.visualstudio.com/).
 
 ## Development environment with data for Rapporteket
 If you are into development of content at Rapporteket you might want RStudio as
