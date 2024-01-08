@@ -35,7 +35,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 USER 1000
 
-COPY .config/code-server-settings.json ./.local/share/code-server/User/settings.json
+COPY settings.json ./.local/share/code-server/User/settings.json
 
 ARG R_LIBS_USER=/home/coder/.config/R/library:/home/coder/R/library
 ENV R_LIBS_USER=${R_LIBS_USER}
