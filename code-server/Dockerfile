@@ -28,7 +28,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     locales-all \
     netcat-openbsd \
     pandoc \
-    pandoc-citeproc \
     r-base \
     r-base-dev \
     tzdata \
