@@ -33,8 +33,8 @@ ENV TZ=Europe/Oslo
 # install R package dependencies and TinyTeX
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install2.r --error --skipinstalled --ncpus -1 \
-    rapbase \
     remotes \
+    && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 
     && wget -qO- "https://yihui.org/tinytex/install-unx.sh" | sh -s - --admin --no-path \
     && mv /root/.TinyTeX /opt/.TinyTeX \
