@@ -25,6 +25,7 @@ jobs:
           - {name: code-server}
           - {name: rstudio}
           - {name: base-r}
+          - {name: dev}
     name: ${{ matrix.config.name }}
     steps:
       - name: Check out the repo
