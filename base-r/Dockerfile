@@ -17,7 +17,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libmysqlclient21 \
     lmodern \
     locales \
-    wget \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Set norsk bokmaal as default system locale
@@ -34,11 +33,12 @@ ENV TZ=Europe/Oslo
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install2.r --error --skipinstalled --ncpus -1 \
     remotes \
+    tinytex \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 
-    && wget -qO- "https://yihui.org/tinytex/install-unx.sh" | sh -s - --admin --no-path \
-    && mv /root/.TinyTeX /opt/.TinyTeX \
-    && /opt/.TinyTeX/bin/x86_64-linux/tlmgr path add \
+    && R -e "tinytex::install_tinytex()" \
+    && export PATH="$HOME/bin:$PATH" \
+    && tlmgr update --self --all \
     && tlmgr install \
         amsmath \
         babel-norsk \
