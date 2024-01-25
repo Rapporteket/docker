@@ -30,12 +30,8 @@ ENV LANG=nb_NO.UTF-8
 ENV TZ=Europe/Oslo
 
 # install R package dependencies and TinyTeX
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN install2.r --error --skipinstalled --ncpus -1 \
-    remotes \
-    tinytex \
+RUN R -e "install.packages(c('remotes', 'tinytex'))" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
-    && rm -rf /tmp/downloaded_packages \ 
     && R -e "tinytex::install_tinytex()" \
     && export PATH="$HOME/bin:$PATH" \
     && tlmgr update --self --all \
