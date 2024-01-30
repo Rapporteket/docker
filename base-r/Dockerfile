@@ -37,12 +37,16 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     && rm -rf /tmp/downloaded_packages \ 
     && wget --progress=dot:giga http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
     && tar -xf install-tl-unx.tar.gz \
-    && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install -no-src-install -no-interaction --scheme scheme-minimal
+    && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
+                                                              -no-src-install \
+                                                              -no-interaction \
+                                                              -scheme scheme-minimal \
+                                                              -texdir /usr/local/texlive \
+    && rm -rf install-tl-*
 
-ENV PATH=/usr/local/texlive/2023/bin/x86_64-linux/:${PATH}
+ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
 
 RUN tlmgr install \
-        amsmath \
         babel-norsk \
         bigintcalc \
         bitset \
