@@ -6,7 +6,6 @@ LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 RUN apt-get update && apt-get install -y --no-install-recommends \
     sudo \
     pandoc \
-    pandoc-citeproc \
     libcurl3-gnutls \
     libcurl4-gnutls-dev \
     libcairo2-dev \
@@ -36,11 +35,18 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     remotes \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 
-    && wget -qO- "https://yihui.org/tinytex/install-unx.sh" | sh -s - --admin --no-path \
-    && mv /root/.TinyTeX /opt/.TinyTeX \
-    && /opt/.TinyTeX/bin/x86_64-linux/tlmgr path add \
-    && tlmgr install \
-        amsmath \
+    && wget --progress=dot:giga http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+    && tar -xf install-tl-unx.tar.gz \
+    && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
+                                                              -no-src-install \
+                                                              -no-interaction \
+                                                              -scheme scheme-minimal \
+                                                              -texdir /usr/local/texlive \
+    && rm -rf install-tl-*
+
+ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
+
+RUN tlmgr install \
         babel-norsk \
         bigintcalc \
         bitset \
