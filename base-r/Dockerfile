@@ -4,18 +4,12 @@ LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    sudo \
     pandoc \
-    libcurl3-gnutls \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
-    libxml2-dev \
-    libssl-dev \
     libmariadb-dev \
     libmysqlclient21 \
     lmodern \
     locales \
+    perl \
     wget \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -35,7 +29,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     remotes \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 
-    && wget --progress=dot:giga http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+    && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
     && tar -xf install-tl-unx.tar.gz \
     && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
                                                               -no-src-install \
@@ -48,52 +42,10 @@ ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
 
 RUN tlmgr install \
         babel-norsk \
-        bigintcalc \
-        bitset \
         booktabs \
         caption \
-        collection-langeuropean \
-        datetime \
-        epstopdf-pkg \
-        eso-pic \
-        etexcmds \
-        etoolbox \
         fancyhdr \
-        float \
-        fmtcount \
-        fontaxes \
-        framed \
-        geometry \
-        gettitlestring \
-        grfext \
-        hycolor \
         hyperref \
-        hyphen-norwegian \
-        intcalc \
-        kvdefinekeys \
-        kvsetkeys \
-        lastpage \
-        latex-amsmath-dev \
-        lato \
-        letltxmacro \
-        ltxcmds \
-        marginnote \
-        microtype \
-        oberdiek \
-        pdfescape \
-        pdflscape \
-        pdfpages \
-        ragged2e \
-        refcount \
-        rerunfilecheck \
-        sectsty \
-        stringenc \
-        subfig \
-        textpos \
-        titlesec \
-        ucs \
-        uniquecounter \
-        xcolor \
-        zapfding
+        hyphen-norwegian
 
 CMD ["R"]
