@@ -27,8 +27,15 @@ jobs:
     name: ${{ matrix.config.name }}
     steps:
     - uses: actions/checkout@v3
-    - name: Build a Docker image
-      run: docker build -t rapporteket/${{ matrix.config.name }} ${{ matrix.config.name }}/.
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v5.1.0
+      with:
+        context: ./${{ matrix.config.name }}/.
+        file: ./${{ matrix.config.name }}/Dockerfile
+        push: false
+        tags: rapporteket/${{ matrix.config.name }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
@@ -38,7 +45,7 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         image: rapporteket/${{ matrix.config.name }}
-        args: --file=Dockerfile --severity-threshold=critical
+        args: --file=${{ matrix.config.name }}/Dockerfile --severity-threshold=critical
     - name: Upload result to GitHub Code Scanning
       uses: github/codeql-action/upload-sarif@v2
       with:
