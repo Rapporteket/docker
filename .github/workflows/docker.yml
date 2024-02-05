@@ -25,6 +25,8 @@ jobs:
       images: ${{ steps.filter.outputs.changes }}
     steps:
     # For pull requests it's not necessary to checkout the code
+    - name: Check out the repo
+      uses: actions/checkout@v4.1.1
     - uses: dorny/paths-filter@v3
       id: filter
       with:
