@@ -27,7 +27,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libfribidi-dev \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-
 # testing: shiny-server just do not get anything but locale C
 RUN locale-gen nb_NO.UTF-8
 
