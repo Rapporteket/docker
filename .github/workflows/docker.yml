@@ -16,29 +16,44 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    outputs:
+      # Expose matched filters as job 'packages' output variable
+      images: ${{ steps.filter.outputs.changes }}
+    steps:
+    # For pull requests it's not necessary to checkout the code
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          code-server: code-server
+          rstudio: rstudio
+          base-r: base-r
+          dev: dev
+
   push_to_registries:
+    needs: changes
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - {name: code-server}
-          - {name: rstudio}
-          - {name: base-r}
-          - {name: dev}
-    name: ${{ matrix.config.name }}
+        image: ${{ fromJSON(needs.changes.outputs.images) }}
+    name: ${{ matrix.image }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4.1.1
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          dockerfile: "${{ matrix.config.name }}/Dockerfile"
+          dockerfile: "${{ matrix.image }}/Dockerfile"
       - name: Prepare tags
         id: docker_meta
         uses: docker/metadata-action@v5.5.1
         with:
-          images: rapporteket/${{ matrix.config.name }}
+          images: rapporteket/${{ matrix.image }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -55,8 +70,8 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v5.1.0
         with:
-          context: ./${{ matrix.config.name }}/.
-          file: ./${{ matrix.config.name }}/Dockerfile
+          context: ./${{ matrix.image }}/.
+          file: ./${{ matrix.image }}/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
