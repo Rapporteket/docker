@@ -29,7 +29,7 @@ jobs:
       id: filter
       with:
         filters: |
-          code-server: code-server
+          code-server: "code-server/**"
           rstudio: rstudio
           base-r: base-r
           dev: dev
