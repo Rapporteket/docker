@@ -21,10 +21,8 @@ jobs:
     permissions:
       pull-requests: read
     outputs:
-      # Expose matched filters as job 'packages' output variable
       images: ${{ steps.filter.outputs.changes }}
     steps:
-    # For pull requests it's not necessary to checkout the code
     - name: Check out the repo
       uses: actions/checkout@v4.1.1
     - uses: dorny/paths-filter@v3
@@ -38,6 +36,7 @@ jobs:
 
   push_to_registries:
     needs: changes
+    if: ${{ needs.changes.outputs.images != '[]' && needs.changes.outputs.images != '' }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
