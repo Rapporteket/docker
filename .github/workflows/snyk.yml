@@ -60,7 +60,7 @@ jobs:
       with:
         command: monitor
         image: rapporteket/${{ matrix.config.name }}
-        args: --file=Dockerfile --severity-threshold=critical --org=b034af62-43be-40c7-95e8-fdc56d6f3092
+        args: --file=${{ matrix.config.name }}/Dockerfile --severity-threshold=critical --org=b034af62-43be-40c7-95e8-fdc56d6f3092
     - name: Accept only vulnerability levels below critical 
       continue-on-error: false
       uses: snyk/actions/docker@14818c4695ecc4045f33c9cee9e795a788711ca4
@@ -68,4 +68,4 @@ jobs:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         image: rapporteket/${{ matrix.config.name }}
-        args: --file=Dockerfile --severity-threshold=critical
+        args: --file=${{ matrix.config.name }}/Dockerfile --severity-threshold=critical
