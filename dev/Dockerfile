@@ -153,7 +153,3 @@ RUN touch /home/rstudio/.Renviron \
         uniquecounter \
         xcolor \
         zapfding
-
-# Anothoer change
-
-RUN echo "TEST"

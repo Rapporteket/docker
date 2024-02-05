@@ -30,9 +30,9 @@ jobs:
       with:
         filters: |
           code-server: "code-server/**"
-          rstudio: rstudio
-          base-r: base-r
-          dev: dev
+          rstudio: "rstudio/**"
+          base-r: "base-r/**"
+          dev: "dev/**"
 
   push_to_registries:
     needs: changes
