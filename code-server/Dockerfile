@@ -43,6 +43,8 @@ ENV R_LIBS_USER=${R_LIBS_USER}
 ARG R_RAP_CONFIG_PATH=/home/coder/.config/rap_config
 ENV R_RAP_CONFIG_PATH=${R_RAP_CONFIG_PATH}
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN touch /home/coder/.Renviron \
     && echo "R_LIBS_USER=${R_LIBS_USER}" >> /home/coder/.Renviron \
     && echo "R_RAP_CONFIG_PATH=${R_RAP_CONFIG_PATH}" >> /home/coder/.Renviron \
