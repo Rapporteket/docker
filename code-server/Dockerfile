@@ -43,17 +43,27 @@ ENV R_LIBS_USER=${R_LIBS_USER}
 ARG R_RAP_CONFIG_PATH=/home/coder/.config/rap_config
 ENV R_RAP_CONFIG_PATH=${R_RAP_CONFIG_PATH}
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 RUN touch /home/coder/.Renviron \
     && echo "R_LIBS_USER=${R_LIBS_USER}" >> /home/coder/.Renviron \
     && echo "R_RAP_CONFIG_PATH=${R_RAP_CONFIG_PATH}" >> /home/coder/.Renviron \
     && code-server --install-extension reditorsupport.r \
     && mkdir -p /home/coder/R/library \
-    && R -e "install.packages(c('remotes', 'devtools', 'tinytex', 'languageserver'), lib = '/home/coder/R/library')" \
+    && R -e "install.packages(c('remotes', 'devtools', 'languageserver'), lib = '/home/coder/R/library')" \
     && R -e "remotes::install_github('Rapporteket/rapbase@*release', lib = '/home/coder/R/library')" \
-    && R -e "tinytex::install_tinytex()" \
-    && export PATH="$HOME/bin:$PATH" \
-    && tlmgr update --self --all \
-    && tlmgr install \
+    && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+    && tar -xf install-tl-unx.tar.gz \
+    && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
+                                                              -no-src-install \
+                                                              -no-interaction \
+                                                              -scheme scheme-minimal \
+                                                              -texdir /home/coder/texlive \
+    && rm -rf install-tl-*
+
+ENV PATH=/home/coder/texlive/bin/x86_64-linux/:${PATH}
+
+RUN tlmgr install \
         amsmath \
         babel-norsk \
         bigintcalc \
