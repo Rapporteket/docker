@@ -1,0 +1,9 @@
+
+# for registry development
+norgast:
+  host: db
+  name: deformitetReportDataStaging
+  user: root
+  pass: root
+  disp: ForDevOnly
+
