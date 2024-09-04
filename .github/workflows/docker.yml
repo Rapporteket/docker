@@ -33,6 +33,7 @@ jobs:
           rstudio: "rstudio/**"
           base-r: "base-r/**"
           dev: "dev/**"
+          deformitet-dev: "deformitet-dev/**"
 
   push_to_registries:
     needs: changes
