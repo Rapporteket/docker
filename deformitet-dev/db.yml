@@ -1,6 +1,6 @@
 
 # for registry development
-norgast:
+deformitet:
   host: db
   name: deformitetReportDataStaging
   user: root
