@@ -2,7 +2,7 @@
 # for registry development
 deformitet:
   host: db
-  name: deformitetReportDataStaging
+  name: DeformitetRapporteket
   user: root
   pass: root
   disp: ForDevOnly
