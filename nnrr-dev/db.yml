@@ -1,0 +1,9 @@
+
+# for registry development
+norgast:
+  host: db
+  name: nnrrReportDataStaging
+  user: root
+  pass: root
+  disp: ForNNRRDevOnly
+
