@@ -1,5 +1,7 @@
 FROM codercom/code-server:4.21.1
 
+LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+
 WORKDIR /home/coder
 
 ARG GH_PAT

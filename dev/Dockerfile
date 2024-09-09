@@ -1,6 +1,6 @@
 FROM rocker/verse:4.4.1
 
-LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
