@@ -35,6 +35,7 @@ jobs:
           dev: "dev/**"
           deformitet-dev: "deformitet-dev/**"
           norgast-dev: "norgast-dev/**"
+          nnrr-dev: "nnrr-dev/**"
 
   push_to_registries:
     needs: changes
