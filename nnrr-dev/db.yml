@@ -5,5 +5,5 @@ norgast:
   name: nnrrReportDataStaging
   user: root
   pass: root
-  disp: ForNNRRDevOnly
+  disp: ForNNRRDevOnlytest
 
