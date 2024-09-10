@@ -1,0 +1,8 @@
+
+# for registry development
+norspis:
+  host: db
+  name: NorSpisReportDataStaging
+  user: root
+  pass: root
+  disp: ForNorspisDevOnly

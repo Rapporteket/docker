@@ -37,6 +37,7 @@ jobs:
           norgast-dev: "norgast-dev/**"
           nnrr-dev: "nnrr-dev/**"
           nra-dev: "nra-dev/**"
+          norspis-dev: "norspis-dev/**"
 
   push_to_registries:
     needs: changes
