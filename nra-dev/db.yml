@@ -1,0 +1,8 @@
+
+# for registry development
+nra:
+  host: db
+  name: NRAReportDataStaging
+  user: root
+  pass: root
+  disp: ForNRADevOnly
