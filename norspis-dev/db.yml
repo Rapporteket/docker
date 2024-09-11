@@ -5,4 +5,4 @@ norspis:
   name: NorSpisReportDataStaging
   user: root
   pass: root
-  disp: ForNorspisDevOnly
+  disp: ForNorspisDevOnly1
