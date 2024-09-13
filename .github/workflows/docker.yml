@@ -39,6 +39,7 @@ jobs:
           nra-dev: "nra-dev/**"
           norspis-dev: "norspis-dev/**"
           muskel-dev: "muskel-dev/**"
+          smerte-dev: "smerte-dev/**"
 
   push_to_registries:
     needs: changes

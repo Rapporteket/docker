@@ -1,0 +1,13 @@
+# for registry development
+smerteLokal:
+  host: db
+  name: SmerteReportDataStaging
+  user: root
+  pass: root
+  disp: ForSmerteLokalDevOnly
+smerteNasjonal:
+  host: db
+  name: SmerteNasjonalReportDataStaging
+  user: root
+  pass: root
+  disp: ForSmerteNasjonalDevOnly
