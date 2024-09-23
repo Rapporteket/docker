@@ -41,6 +41,7 @@ jobs:
           muskel-dev: "muskel-dev/**"
           smerte-dev: "smerte-dev/**"
           ablanor-dev: "ablanor-dev/**"
+          noric-dev: "noric-dev/**"
 
   push_to_registries:
     needs: changes

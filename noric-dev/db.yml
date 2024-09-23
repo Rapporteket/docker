@@ -1,0 +1,14 @@
+
+# for registry development
+noricStagingNasjonal:
+  host : db
+  name : NORICReportDataStaging
+  user : root
+  pass : root
+  disp : Nasjonal
+noricStaging102966:
+  host : db
+  name : NORICReportDataStagingBergen
+  user : root
+  pass : root
+  disp : Bergen
