@@ -36,4 +36,4 @@ RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml
                                 'tidyselect', \
                                 'xtable', \
                                 'yaml'))" \
-    && R -e "remotes::install_github(c('Rapporteket/rapbase'))"
+    && R -e "remotes::install_github(c('Rapporteket/rapbase@*release', 'Rapporteket/noric'))"
