@@ -6,7 +6,7 @@ LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 RUN apt-get update && apt-get install -y --no-install-recommends \
     openssl \
     nghttp2 \
-    glibc \
+    libc6 \
     curl \
     pandoc \
     libmariadb-dev \
