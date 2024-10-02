@@ -4,6 +4,10 @@ LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    openssl \
+    nghttp2 \
+    glibc \
+    curl \
     pandoc \
     libmariadb-dev \
     libmysqlclient21 \
