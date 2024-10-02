@@ -36,6 +36,8 @@ jobs:
         file: ./${{ matrix.config.name }}/Dockerfile
         push: false
         tags: rapporteket/${{ matrix.config.name }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
