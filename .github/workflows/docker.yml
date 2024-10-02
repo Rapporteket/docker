@@ -42,6 +42,7 @@ jobs:
           smerte-dev: "smerte-dev/**"
           ablanor-dev: "ablanor-dev/**"
           noric-dev: "noric-dev/**"
+          rapregtemplate-dev: "rapregtemplate-dev/**"
 
   push_to_registries:
     needs: changes
