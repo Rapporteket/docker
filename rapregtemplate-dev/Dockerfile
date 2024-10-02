@@ -11,3 +11,5 @@ RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml
     && rm /home/rstudio/rap_config/db.yml \
     && R -e "remotes::install_github(c('Rapporteket/rapbase', \
     'Rapporteket/rapregtemplate'))"
+
+COPY rstudio-prefs.json /home/rstudio/.config/rstudio/rstudio-prefs.json
