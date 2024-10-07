@@ -57,8 +57,9 @@ jobs:
 
   snyk:
     permissions:
+      id-token: write
       contents: read
-      packages: read
+      packages: write
     runs-on: ubuntu-latest
     needs: [ build_image ]
     env:
