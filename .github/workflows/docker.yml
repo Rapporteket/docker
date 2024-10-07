@@ -24,7 +24,7 @@ jobs:
       images: ${{ steps.filter.outputs.changes }}
     steps:
     - name: Check out the repo
-      uses: actions/checkout@v4.1.7
+      uses: actions/checkout@v4.2.0
     - uses: dorny/paths-filter@v3
       id: filter
       with:
@@ -42,6 +42,7 @@ jobs:
           smerte-dev: "smerte-dev/**"
           ablanor-dev: "ablanor-dev/**"
           noric-dev: "noric-dev/**"
+          rapregtemplate-dev: "rapregtemplate-dev/**"
 
   push_to_registries:
     needs: changes
@@ -54,7 +55,7 @@ jobs:
     name: ${{ matrix.image }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4.1.7
+        uses: actions/checkout@v4.2.0
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
         with:
@@ -78,7 +79,7 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push to Docker Hub
-        uses: docker/build-push-action@v6.7.0
+        uses: docker/build-push-action@v6.9.0
         with:
           context: ./${{ matrix.image }}/.
           file: ./${{ matrix.image }}/Dockerfile
