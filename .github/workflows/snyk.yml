@@ -103,11 +103,11 @@ jobs:
         command: monitor
         image: ${{ steps.docker_meta.outputs.tags }}
         args: --file=${{ matrix.config.name }}/Dockerfile --severity-threshold=critical --org=b034af62-43be-40c7-95e8-fdc56d6f3092
-    - name: Accept only vulnerability levels below critical 
+    - name: Accept only vulnerability levels below high 
       continue-on-error: false
       uses: snyk/actions/docker@master
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
       with:
         image: ${{ steps.docker_meta.outputs.tags }}
-        args: --file=${{ matrix.config.name }}/Dockerfile --severity-threshold=critical
+        args: --file=${{ matrix.config.name }}/Dockerfile --severity-threshold=high
