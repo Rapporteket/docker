@@ -36,7 +36,7 @@ jobs:
       with:
         registry: ${{ env.GITHUB_REGISTRY }}
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ github.token }}
     - name: Prepare tags
       id: docker_meta
       uses: docker/metadata-action@v5.5.1
