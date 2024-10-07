@@ -25,6 +25,7 @@ jobs:
             - {name: base-r}
     name: ${{ matrix.config.name }}
     steps:
+    - uses: actions/checkout@v4
     - name: Run Snyk to check Docker image for vulnerabilities
       # Snyk can be used to break the build when it detects vulnerabilities.
       # In this case we want to upload the issues to GitHub Code Scanning
