@@ -1,13 +1,9 @@
 FROM rocker/r-ver:4.4.1
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    openssl \
-    nghttp2 \
-    libc6 \
-    curl \
     pandoc \
     libmariadb-dev \
     libmysqlclient21 \
