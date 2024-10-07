@@ -19,6 +19,12 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_REGISTRY: ghcr.io
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: base-r}
+          - {name: base-r-alpine}
     steps:
       - uses: actions/checkout@v4
       - name: Log in to the Container registry 📦
