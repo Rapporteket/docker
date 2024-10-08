@@ -9,5 +9,6 @@ ENV GITHUB_PAT=${GH_PAT}
 COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
 RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
     && rm /home/rstudio/rap_config/db.yml \
+    && R -e install.packages("INLA",repos=c(getOption("repos"),INLA="https://inla.r-inla-download.org/R/stable"), dep=TRUE) \
     && R -e "remotes::install_github(c('Rapporteket/rapbase', 'Rapporteket/rapFigurer', \
     'Rapporteket/norgast'))"
