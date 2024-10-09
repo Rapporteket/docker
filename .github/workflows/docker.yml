@@ -44,6 +44,7 @@ jobs:
           noric-dev: "noric-dev/**"
           rapregtemplate-dev: "rapregtemplate-dev/**"
           base-r-alpine: "base-r-alpine/**"
+          pilot-dev: "pilot-dev/**"
 
   push_to_registries:
     needs: changes
