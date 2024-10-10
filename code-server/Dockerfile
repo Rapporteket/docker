@@ -2,8 +2,8 @@ FROM codercom/code-server:4.21.1
 
 WORKDIR /home/coder
 
-ARG GH_PAT
-ENV GITHUB_PAT=${GH_PAT}
+ARG GITHUB_PAT
+ENV GITHUB_PAT=${GITHUB_PAT}
 
 USER root
 
