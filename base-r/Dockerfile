@@ -27,6 +27,15 @@ ENV TZ=Europe/Oslo
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN install2.r --error --skipinstalled --ncpus -1 \
     remotes \
+    bslib \
+    dplyr \
+    ggplot2 \
+    magrittr \
+    readr \
+    rlang \
+    rpivotTable \
+    shiny \
+    yaml \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 
     && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
