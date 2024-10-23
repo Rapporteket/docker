@@ -8,9 +8,4 @@ If you do not know what containers are you can read more about it
 
 # Content
 
-Contents are found in the sub-directories of this repository. A short summary is
-provided below.
-
-## code-server
-
-A docker image containing R and the IDE [Visual Studio Code](https://code.visualstudio.com/).
+Contents are found in the sub-directories of this repository.
