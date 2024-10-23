@@ -5,10 +5,14 @@ on:
     types: [published]
   push:
     branches: [ "main" ]
+    paths:
+      - "base-r/Dockerfile"    
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "base-r/Dockerfile"    
   schedule:
-    - cron: '30 22 * * 5'
+    - cron: '30 22 * * 0'
 
 jobs:
   snyk:
