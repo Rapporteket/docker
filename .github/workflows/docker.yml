@@ -34,6 +34,7 @@ jobs:
           base-r: "base-r/**"
           dev: "dev/**"
           deformitet-dev: "deformitet-dev/**"
+          ltmv-dev: "ltmv-dev/**"
           norgast-dev: "norgast-dev/**"
           nnrr-dev: "nnrr-dev/**"
           nra-dev: "nra-dev/**"
