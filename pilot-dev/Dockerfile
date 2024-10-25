@@ -5,5 +5,5 @@ LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 ARG GITHUB_PAT
 ENV GITHUB_PAT=${GITHUB_PAT}
 
-RUN R -e "remotes::install_github(c('Rapporteket/rapbase', 'Rapporteket/rapFigurer', \
-    'Rapporteket/pilot'))"
+RUN R -e "remotes::install_github(c('Rapporteket/rapbase@nordiscir_mod', 'Rapporteket/rapFigurer', \
+    'Rapporteket/pilot', 'Rapporteket/pilot@nhn'))"
