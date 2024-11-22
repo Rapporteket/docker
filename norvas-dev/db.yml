@@ -1,0 +1,9 @@
+
+# for registry development
+norgast:
+  host: db
+  name: NorvasReportDataStaging
+  user: root
+  pass: root
+  disp: ForNorvasDevOnly
+
