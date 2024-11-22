@@ -1,6 +1,6 @@
 
 # for registry development
-norgast:
+norvas:
   host: db
   name: NorvasReportDataStaging
   user: root
