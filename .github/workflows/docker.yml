@@ -65,7 +65,7 @@ jobs:
           dockerfile: "${{ matrix.image }}/Dockerfile"
       - name: Prepare tags
         id: docker_meta
-        uses: docker/metadata-action@v5.5.1
+        uses: docker/metadata-action@v5.6.1
         with:
           images: rapporteket/${{ matrix.image }}
           tags: |
