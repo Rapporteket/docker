@@ -46,6 +46,7 @@ jobs:
           base-r-alpine: "base-r-alpine/**"
           pilot-dev: "pilot-dev/**"
           norvas-dev: "norvas-dev/**"
+          rygg-dev: "rygg-dev/**"
 
   push_to_registries:
     needs: changes
