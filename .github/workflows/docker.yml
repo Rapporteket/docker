@@ -47,6 +47,7 @@ jobs:
           pilot-dev: "pilot-dev/**"
           norvas-dev: "norvas-dev/**"
           rygg-dev: "rygg-dev/**"
+          intensivberedskap-dev: "intensivberedskap-dev/**"
 
   push_to_registries:
     needs: changes
