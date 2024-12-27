@@ -1,0 +1,9 @@
+
+# for registry development
+ethirgast:
+  host: db
+  name: Ethirgast
+  user: root
+  pass: root
+  disp: ForEthirgastDevOnly
+
