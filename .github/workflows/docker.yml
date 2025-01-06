@@ -49,6 +49,7 @@ jobs:
           rygg-dev: "rygg-dev/**"
           intensivberedskap-dev: "intensivberedskap-dev/**"
           ethirgast-dev: "ethirgast-dev/**"
+          kvarus-dev: "kvarus-dev/**"
 
   push_to_registries:
     needs: changes
