@@ -1,6 +1,6 @@
 FROM rapporteket/dev:weekly
 
-LABEL maintainer = "Kevin Thon <kevin.otto.thon@helse-nord.no>"
+LABEL maintainer="Kevin Thon <kevin.otto.thon@helse-nord.no>"
 
 ARG GITHUB_PAT
 ENV GITHUB_PAT=${GITHUB_PAT}
