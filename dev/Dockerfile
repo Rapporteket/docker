@@ -1,8 +1,8 @@
 FROM rocker/verse:4.4.1
 
-LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # system libraries of general use
 # hadolint ignore=DL3008
@@ -33,7 +33,7 @@ RUN locale-gen nb_NO.UTF-8
 # System locales
 ENV LANG=nb_NO.UTF-8
 ENV LC_ALL=nb_NO.UTF-8
-ENV LC_TIME nb_NO.UTF-8
+ENV LC_TIME=nb_NO.UTF-8
 RUN echo "LANG=\"nb_NO.UTF-8\"" > /etc/default/locale
 ENV TZ=Europe/Oslo
 
