@@ -50,6 +50,7 @@ jobs:
           intensivberedskap-dev: "intensivberedskap-dev/**"
           ethirgast-dev: "ethirgast-dev/**"
           kvarus-dev: "kvarus-dev/**"
+          parkinson-dev: "parkinson-dev/**"
 
   push_to_registries:
     needs: changes
