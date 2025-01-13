@@ -1,0 +1,9 @@
+
+# for registry development
+rygg:
+  host: db
+  name: NKRRapporteket
+  user: root
+  pass: root
+  disp: ForRyggDevOnly
+
