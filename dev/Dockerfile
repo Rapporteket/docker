@@ -1,8 +1,8 @@
 FROM rocker/verse:4.4.1
 
-LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # system libraries of general use
 # hadolint ignore=DL3008
@@ -33,7 +33,7 @@ RUN locale-gen nb_NO.UTF-8
 # System locales
 ENV LANG=nb_NO.UTF-8
 ENV LC_ALL=nb_NO.UTF-8
-ENV LC_TIME nb_NO.UTF-8
+ENV LC_TIME=nb_NO.UTF-8
 RUN echo "LANG=\"nb_NO.UTF-8\"" > /etc/default/locale
 ENV TZ=Europe/Oslo
 
@@ -94,7 +94,7 @@ RUN touch /home/rstudio/.Renviron \
     && echo "DB_HOST=${DB_HOST}" >> /home/shiny/.Renviron \
     && echo "DB_USER=${DB_USER}" >> /home/shiny/.Renviron \
     && echo "DB_PASS=${DB_PASS}" >> /home/shiny/.Renviron \
-    && R -e "install.packages(c('remotes', 'lifecycle', 'testthat'), repos='https://cloud.r-project.org/')" \
+    && R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')" \
     && R -e "file.copy(system.file(c('dbConfig.yml', 'rapbaseConfig.yml', 'autoReport.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && touch ${CONFIG_PATH}/appLog.csv \
