@@ -42,10 +42,51 @@ ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
 
 RUN tlmgr install \
         babel-norsk \
+        bigintcalc \
+        bitset \
         booktabs \
         caption \
+        datetime \
+        epstopdf-pkg \
+        eso-pic \
+        etexcmds \
+        etoolbox \
         fancyhdr \
+        float \
+        fmtcount \
+        fontaxes \
+        framed \
+        geometry \
+        gettitlestring \
+        grfext \
+        hycolor \
         hyperref \
-        hyphen-norwegian
+        hyphen-norwegian \
+        intcalc \
+        kvdefinekeys \
+        kvsetkeys \
+        lastpage \
+        latex-amsmath-dev \
+        lato \
+        letltxmacro \
+        ltxcmds \
+        marginnote \
+        microtype \
+        oberdiek \
+        pdfescape \
+        pdflscape \
+        pdfpages \
+        ragged2e \
+        refcount \
+        rerunfilecheck \
+        sectsty \
+        stringenc \
+        subfig \
+        textpos \
+        titlesec \
+        ucs \
+        uniquecounter \
+        xcolor \
+        zapfding
 
 CMD ["R"]
