@@ -1,6 +1,6 @@
 FROM rocker/verse:4.4.2
 
-LABEL maintainer "Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
 RUN echo "www-frame-origin=same" >> /etc/rstudio/disable_auth_rserver.conf \
   && echo "www-verify-user-agent=0" >> /etc/rstudio/disable_auth_rserver.conf
