@@ -34,7 +34,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
                                                               -no-src-install \
                                                               -no-interaction \
-                                                              -scheme scheme-minimal \
+                                                              -scheme scheme-basic \
                                                               -texdir /usr/local/texlive \
     && rm -rf install-tl-*
 
