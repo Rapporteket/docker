@@ -105,6 +105,7 @@ RUN touch /home/rstudio/.Renviron \
     && tlmgr install \
         amsmath \
         babel-norsk \
+        beamer \
         bigintcalc \
         bitset \
         booktabs \
