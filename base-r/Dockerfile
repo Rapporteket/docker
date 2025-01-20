@@ -40,8 +40,9 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
 
 ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
 
-RUN tlmgr install \
+RUN tlmgr update --self && tlmgr install \
         babel-norsk \
+        beamer \
         bigintcalc \
         bitset \
         booktabs \
