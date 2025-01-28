@@ -88,6 +88,7 @@ RUN tlmgr update --self && tlmgr install \
         ucs \
         uniquecounter \
         xcolor \
+        xkeyval \
         zapfding
 
 CMD ["R"]
