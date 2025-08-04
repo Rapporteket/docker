@@ -1,8 +1,0 @@
-
-# for registry development
-rapregtemplate:
-  host: db
-  name: rapregtemplate
-  user: root
-  pass: root
-  disp: ForRapregtemplateDevOnly

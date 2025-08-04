@@ -1,9 +1,0 @@
-
-# for registry development
-muskel:
-  host: db
-  name: MuskelReportDataStaging
-  user: root
-  pass: root
-  disp: ForMuskelDevOnly1
-

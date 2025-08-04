@@ -1,9 +1,0 @@
-
-# for registry development
-deformitet:
-  host: db
-  name: DeformitetRapporteket
-  user: root
-  pass: root
-  disp: ForDevOnly
-

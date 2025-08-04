@@ -1,9 +1,0 @@
-
-# for registry development
-nir:
-  host: db
-  name: intensivregisterreportdatastaging
-  user: root
-  pass: root
-  disp: ForNIRDevOnly
-

@@ -1,9 +1,0 @@
-
-# for registry development
-norgast:
-  host: db
-  name: NoRGastReportDataStaging
-  user: root
-  pass: root
-  disp: ForNorgastDevOnly
-
