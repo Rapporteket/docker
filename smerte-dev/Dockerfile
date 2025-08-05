@@ -8,4 +8,4 @@ LABEL maintainer="Kevin Thon <kevin.otto.thon@helse-nord.no>"
 COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
 RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
     && rm /home/rstudio/rap_config/db.yml \
-    && R -e "remotes::install_github(c('Rapporteket/smerte', 'Rapporteket/rapbase@master'))"
+    && R -e "remotes::install_github(c('Rapporteket/smerte', 'Rapporteket/rapbase@main'))"
