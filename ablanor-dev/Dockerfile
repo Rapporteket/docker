@@ -31,4 +31,4 @@ RUN cat /home/rstudio/db.yml >> /home/rstudio/dbConfig.yml \
                                 'tidyselect', \
                                 'xtable'))" \
     && R -e "remotes::install_github(c('Rapporteket/ablanor', \
-    'Rapporteket/rapbase@master'))"
+    'Rapporteket/rapbase@main'))"
