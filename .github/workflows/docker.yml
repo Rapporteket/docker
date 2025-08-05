@@ -32,6 +32,7 @@ jobs:
           base-r: "base-r/**"
           dev: "dev/**"
           ltmv-dev: "ltmv-dev/**"
+          smerte-dev: "smerte-dev/**"
           ablanor-dev: "ablanor-dev/**"
           noric-dev: "noric-dev/**"
           base-r-alpine: "base-r-alpine/**"
