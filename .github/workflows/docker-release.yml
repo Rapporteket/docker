@@ -1,0 +1,42 @@
+name: Publish Docker image on release
+on:
+  release:
+    types: [published]
+
+jobs:
+  push_to_registries:
+    runs-on: ubuntu-24.04
+    matrix:
+      config:
+        - {name: base-r}
+        - {name: dev}
+        - {name: base-r-alpine}
+    name: ${{ matrix.config.name }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Prepare tags
+        id: docker_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: rapporteket/${{ matrix.config.image }}
+          tags: |
+            type=semver,pattern={{version}}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v6
+        with:
+          context: ./${{ matrix.config.image }}/.
+          file: ./${{ matrix.config.image }}/Dockerfile
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+          build-args: |
+            GITHUB_PAT=${{ secrets.GH_TOKEN }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
