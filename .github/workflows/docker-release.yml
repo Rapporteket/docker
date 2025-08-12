@@ -6,11 +6,13 @@ on:
 jobs:
   push_to_registries:
     runs-on: ubuntu-24.04
-    matrix:
-      config:
-        - {name: base-r}
-        - {name: dev}
-        - {name: base-r-alpine}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: base-r}
+          - {name: dev}
+          - {name: base-r-alpine}
     name: ${{ matrix.config.name }}
     steps:
       - name: Check out the repo
