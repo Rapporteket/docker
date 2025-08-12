@@ -24,7 +24,7 @@ jobs:
             - {name: base-r}
     name: ${{ matrix.config.name }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Build docker image
       run: docker build -t ${{ matrix.config.name }} -f ./${{ matrix.config.name }}/Dockerfile ./${{ matrix.config.name }}
     - name: Run Snyk to check Docker image for vulnerabilities
