@@ -21,7 +21,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v5
         with:
-          images: rapporteket/${{ matrix.config.image }}
+          images: rapporteket/${{ matrix.config.name }}
           tags: |
             type=semver,pattern={{version}}
       - name: Set up Docker Buildx
@@ -34,8 +34,8 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v6
         with:
-          context: ./${{ matrix.config.image }}/.
-          file: ./${{ matrix.config.image }}/Dockerfile
+          context: ./${{ matrix.config.name }}/.
+          file: ./${{ matrix.config.name }}/Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           build-args: |
