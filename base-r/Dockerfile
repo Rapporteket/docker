@@ -82,6 +82,7 @@ RUN tlmgr update --self && tlmgr install \
         refcount \
         rerunfilecheck \
         sectsty \
+        silence \
         stringenc \
         subfig \
         textpos \
