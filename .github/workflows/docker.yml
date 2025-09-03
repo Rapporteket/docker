@@ -7,7 +7,7 @@ on:
     branches:
         - main
   schedule:
-    - cron: '0 21 * * 0' # run Sundays at 21
+    - cron: '45 8 * * 3' # run Sundays at 21
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
