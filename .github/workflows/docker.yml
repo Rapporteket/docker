@@ -43,6 +43,7 @@ jobs:
       fail-fast: false
       matrix:
         image: ${{ fromJSON(needs.changes.outputs.images) }}
+      max-parallel: ${{ github.event_name == 'schedule' && 1 || 4 }}
     name: ${{ matrix.image }}
     steps:
       - name: Check out the repo
