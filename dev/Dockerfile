@@ -145,6 +145,7 @@ RUN touch /home/rstudio/.Renviron \
         refcount \
         rerunfilecheck \
         sectsty \
+        silence \
         stringenc \
         subfig \
         textpos \
