@@ -50,14 +50,14 @@ ENV https_proxy=${PROXY}
 ARG INSTANCE=DEV
 ENV R_RAP_INSTANCE=${INSTANCE}
 
-ARG DB_HOST=db
-ENV DB_HOST=${DB_HOST}
+ARG MYSQL_HOST=db
+ENV MYSQL_HOST=${MYSQL_HOST}
 
-ARG DB_USER=root
-ENV DB_USER=${DB_USER}
+ARG MYSQL_USER=root
+ENV MYSQL_USER=${MYSQL_USER}
 
-ARG DB_PASS=root
-ENV DB_PASS=${DB_PASS}
+ARG MYSQL_PASSWORD=root
+ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
 
 ARG CONFIG_PATH=/home/rstudio/rap_config
 ENV R_RAP_CONFIG_PATH=${CONFIG_PATH}
@@ -82,18 +82,18 @@ RUN touch /home/rstudio/.Renviron \
     && echo "https_proxy=${PROXY}" >> /home/rstudio/.Renviron \
     && echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/rstudio/.Renviron \
     && echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/rstudio/.Renviron \
-    && echo "DB_HOST=${DB_HOST}" >> /home/rstudio/.Renviron \
-    && echo "DB_USER=${DB_USER}" >> /home/rstudio/.Renviron \
-    && echo "DB_PASS=${DB_PASS}" >> /home/rstudio/.Renviron \
+    && echo "MYSQL_HOST=${MYSQL_HOST}" >> /home/rstudio/.Renviron \
+    && echo "MYSQL_USER=${MYSQL_USER}" >> /home/rstudio/.Renviron \
+    && echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> /home/rstudio/.Renviron \
     && touch /home/shiny/.Renviron \
     && echo "TZ=${TZ}" > /home/shiny/.Renviron \
     && echo "http_proxy=${PROXY}" >> /home/shiny/.Renviron \
     && echo "https_proxy=${PROXY}" >> /home/shiny/.Renviron \
     && echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/shiny/.Renviron \
     && echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/shiny/.Renviron \
-    && echo "DB_HOST=${DB_HOST}" >> /home/shiny/.Renviron \
-    && echo "DB_USER=${DB_USER}" >> /home/shiny/.Renviron \
-    && echo "DB_PASS=${DB_PASS}" >> /home/shiny/.Renviron \
+    && echo "MYSQL_HOST=${MYSQL_HOST}" >> /home/shiny/.Renviron \
+    && echo "MYSQL_USER=${MYSQL_USER}" >> /home/shiny/.Renviron \
+    && echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> /home/shiny/.Renviron \
     && R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')" \
     && R -e "file.copy(system.file(c('dbConfig.yml', 'rapbaseConfig.yml', 'autoReport.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
