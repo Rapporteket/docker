@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     pandoc \
     libmariadb-dev \
     libmysqlclient21 \
+    libwebp-dev \
     lmodern \
     locales \
     mariadb-client \
