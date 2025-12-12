@@ -1,9 +1,0 @@
-
-# for registry development
-ltmv:
-  host: db-ltmv
-  name: LangmekDataStaging
-  user: root
-  pass: root
-  disp: ForLtmvDevOnly
-
