@@ -96,9 +96,7 @@ RUN touch /home/rstudio/.Renviron \
     && echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> /home/shiny/.Renviron \
     && R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')" \
-    && R -e "file.copy(system.file(c('dbConfig.yml', 'rapbaseConfig.yml', 'autoReport.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
-    && touch ${CONFIG_PATH}/appLog.csv \
-    && touch ${CONFIG_PATH}/reportLog.csv \
+    && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \
     && chmod ugo+rw ${CONFIG_PATH}/* \
     && tlmgr update --self --all \
