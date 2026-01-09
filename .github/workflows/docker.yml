@@ -27,7 +27,6 @@ jobs:
       id: filter
       with:
         filters: |
-          base-r: "base-r/**"
           dev: "dev/**"
           ltmv-dev: "ltmv-dev/**"
           smerte-dev: "smerte-dev/**"
