@@ -4,8 +4,8 @@ LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
-# install gnupg2 to get latest version, to fix CVE-2025-68973.
-#    gnupg2 \
+# install gnupg2 to get latest version, to fix CVE-2025-68973. rm later if not needed.
+    gnupg2 \
     pandoc \
     libmariadb-dev \
     libmysqlclient21 \
