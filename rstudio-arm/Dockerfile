@@ -67,14 +67,9 @@ RUN mkdir -p ${CONFIG_PATH} \
 
 # add rstudio user to root group  and enable shiny server
 ENV ROOT=TRUE
-## for R v 3.x.x
-#RUN export ADD=shiny && bash /etc/cont-init.d/add
-## for R v >= 4.0.0
-#RUN /rocker_scripts/install_shiny_server.sh \
-#    && rm /srv/shiny-server/index.html \
-#    && rm -rf /srv/shiny-server/sample-apps
 
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN touch /home/rstudio/.Renviron \
     && echo "TZ=${TZ}" > /home/rstudio/.Renviron \
     && echo "http_proxy=${PROXY}" >> /home/rstudio/.Renviron \
