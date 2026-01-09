@@ -1,66 +1,57 @@
-name: Publish Docker image
 on:
+  release:
+    types: [published]
   push:
     branches:
-        - main
+      - main
+    paths:
+      - 'base-r/**'
+      - 'rstudio/**'
+      - '.github/workflows/arm.yml'
   pull_request:
     branches:
-        - main
+      - main
+    paths:
+      - 'base-r/**'
+      - 'rstudio/**'
+      - '.github/workflows/arm.yml'
   schedule:
-    - cron: '0 21 * * 0' # run Sundays at 21
+    - cron: '0 18 * * 0' # run Sundays at 18
+
+name: Publish Docker image, both arm and amd
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  changes:
-    runs-on: ubuntu-24.04
-    permissions:
-      pull-requests: read
-    outputs:
-      images: ${{ steps.filter.outputs.changes }}
-    steps:
-    - name: Check out the repo
-      uses: actions/checkout@v5
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          dev: "dev/**"
-          ltmv-dev: "ltmv-dev/**"
-          smerte-dev: "smerte-dev/**"
-          ablanor-dev: "ablanor-dev/**"
-          noric-dev: "noric-dev/**"
-          traume-dev: "traume-dev/**"
-          base-r-alpine: "base-r-alpine/**"
-
   push_to_registries:
-    needs: changes
-    if: ${{ needs.changes.outputs.images != '[]' && needs.changes.outputs.images != '' }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
-        image: ${{ fromJSON(needs.changes.outputs.images) }}
-      max-parallel: ${{ github.event_name == 'schedule' && 1 || 4 }}
-    name: ${{ matrix.image }}
+        config:
+          - {name: base-r}
+          - {name: rstudio}
+    name: ${{ matrix.config.name }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.3.0
         with:
-          dockerfile: "${{ matrix.image }}/Dockerfile"
+          dockerfile: "${{ matrix.config.name }}/Dockerfile"
       - name: Prepare tags
         id: docker_meta
         uses: docker/metadata-action@v5
         with:
-          images: rapporteket/${{ matrix.image }}
+          images: rapporteket/${{ matrix.config.name }}
           tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=ref,event=branch
-            type=ref,event=pr
             type=schedule,pattern=weekly
+      - name: Set up QEMU for multi-platform builds
+        uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       - name: Login to DockerHub
@@ -72,8 +63,9 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v6
         with:
-          context: ./${{ matrix.image }}/.
-          file: ./${{ matrix.image }}/Dockerfile
+          context: ./${{ matrix.config.name }}/.
+          file: ./${{ matrix.config.name }}/Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
