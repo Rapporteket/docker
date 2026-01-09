@@ -40,7 +40,7 @@ jobs:
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.3.0
         with:
-          dockerfile: "Dockerfile"
+          dockerfile: "${{ matrix.config.name }}/Dockerfile"
       - name: Prepare tags
         id: docker_meta
         uses: docker/metadata-action@v5
@@ -50,10 +50,6 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
             type=ref,event=branch
             type=schedule,pattern=weekly
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.3.0
-        with:
-          dockerfile: "${{ matrix.config.name }}/Dockerfile"
       - name: Set up QEMU for multi-platform builds
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
