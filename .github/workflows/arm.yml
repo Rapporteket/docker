@@ -53,7 +53,7 @@ jobs:
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.3.0
         with:
-          dockerfile: "${{ matrix.image }}/Dockerfile"
+          dockerfile: "${{ matrix.config.name }}/Dockerfile"
       - name: Set up QEMU for multi-platform builds
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -67,8 +67,8 @@ jobs:
       - name: Build and push to Docker Hub
         uses: docker/build-push-action@v6
         with:
-          context: ./${{ matrix.image }}/.
-          file: ./${{ matrix.image }}/Dockerfile
+          context: ./${{ matrix.config.name }}/.
+          file: ./${{ matrix.config.name }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
