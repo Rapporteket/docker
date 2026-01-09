@@ -2,8 +2,9 @@
 
 <!-- badges: start -->
 [![Version](https://img.shields.io/github/v/release/rapporteket/docker?sort=semver)](https://github.com/rapporteket/rapbase/releases)
-[![Publish Docker image](https://github.com/Rapporteket/docker/actions/workflows/docker.yml/badge.svg)](https://github.com/Rapporteket/docker/actions/workflows/docker.yml)
+[![Publish Docker image](https://github.com/Rapporteket/docker/actions/workflows/docker.yml/badge.svg?branch=main&event=push)](https://github.com/Rapporteket/docker/actions/workflows/docker.yml)
 [![Publish Docker image on release](https://github.com/Rapporteket/docker/actions/workflows/docker-release.yml/badge.svg?event=release)](https://github.com/Rapporteket/docker/actions/workflows/docker-release.yml)
+[![Snyk Container](https://github.com/Rapporteket/docker/actions/workflows/snyk.yml/badge.svg?branch=main&event=push)](https://github.com/Rapporteket/docker/actions/workflows/snyk.yml)
 <!-- badges: end -->
 
 Docker-filer som brukes i Rapporteket, enten som basis-image for applikasjonene eller som utviklingsmiljø (RStudio).
