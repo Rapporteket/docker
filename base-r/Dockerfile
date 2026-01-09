@@ -40,7 +40,11 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
                                                               -texdir /usr/local/texlive \
     && rm -rf install-tl-*
 
+# for amd64 architecture
 ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
+
+# for arm64 architecture
+ENV PATH=/usr/local/texlive/bin/aarch64-linux/:${PATH}
 
 RUN tlmgr update --self && tlmgr install \
         babel-norsk \
