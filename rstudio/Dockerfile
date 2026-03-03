@@ -155,4 +155,5 @@ RUN tlmgr update --self --all \
         ucs \
         uniquecounter \
         xcolor \
+        xkeyval \
         zapfding
