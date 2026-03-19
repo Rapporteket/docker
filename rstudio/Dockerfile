@@ -84,7 +84,7 @@ RUN touch /home/rstudio/.Renviron \
     && echo "MYSQL_USER=${MYSQL_USER}" >> /home/rstudio/.Renviron \
     && echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> /home/rstudio/.Renviron \
     && R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
-    && R -e "remotes::install_github('rapporteket/rapbase@*release')" \
+    && R -e "remotes::install_github('rapporteket/rapbase@*release', dependencies = TRUE)" \
     && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \
     && chmod ugo+rw ${CONFIG_PATH}/* \
@@ -155,4 +155,5 @@ RUN tlmgr update --self --all \
         ucs \
         uniquecounter \
         xcolor \
+        xkeyval \
         zapfding
