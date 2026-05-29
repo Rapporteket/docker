@@ -45,25 +45,6 @@ ENV TZ=Europe/Oslo
 ARG GITHUB_PAT=
 ENV GITHUB_PAT=${GITHUB_PAT}
 
-ARG USERID=
-ENV USERID=${USERID}
-
-ARG PROXY=
-ENV http_proxy=${PROXY}
-ENV https_proxy=${PROXY}
-
-ARG INSTANCE=DEV
-ENV R_RAP_INSTANCE=${INSTANCE}
-
-ARG MYSQL_HOST=db
-ENV MYSQL_HOST=${MYSQL_HOST}
-
-ARG MYSQL_USER=root
-ENV MYSQL_USER=${MYSQL_USER}
-
-ARG MYSQL_PASSWORD=root
-ENV MYSQL_PASSWORD=${MYSQL_PASSWORD}
-
 ARG CONFIG_PATH=/home/rstudio/rap_config
 ENV R_RAP_CONFIG_PATH=${CONFIG_PATH}
 RUN mkdir -p ${CONFIG_PATH} \
@@ -74,16 +55,7 @@ ENV ROOT=TRUE
 
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN touch /home/rstudio/.Renviron \
-    && echo "TZ=${TZ}" > /home/rstudio/.Renviron \
-    && echo "http_proxy=${PROXY}" >> /home/rstudio/.Renviron \
-    && echo "https_proxy=${PROXY}" >> /home/rstudio/.Renviron \
-    && echo "R_RAP_INSTANCE=${INSTANCE}" >> /home/rstudio/.Renviron \
-    && echo "R_RAP_CONFIG_PATH=${CONFIG_PATH}" >> /home/rstudio/.Renviron \
-    && echo "MYSQL_HOST=${MYSQL_HOST}" >> /home/rstudio/.Renviron \
-    && echo "MYSQL_USER=${MYSQL_USER}" >> /home/rstudio/.Renviron \
-    && echo "MYSQL_PASSWORD=${MYSQL_PASSWORD}" >> /home/rstudio/.Renviron \
-    && R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
+RUN R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release', dependencies = TRUE)" \
     && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \
