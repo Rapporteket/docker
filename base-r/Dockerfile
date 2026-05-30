@@ -1,4 +1,4 @@
-FROM rocker/r-ver:4.5.2
+FROM rocker/r-ver:4.6.0
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
