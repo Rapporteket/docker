@@ -2,6 +2,9 @@ FROM rocker/r-ver:4.5.2
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
+ARG GITHUB_PAT=
+ENV GITHUB_PAT=${GITHUB_PAT}
+
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # install gnupg2 to get latest version, to fix CVE-2025-68973. rm later if not needed.

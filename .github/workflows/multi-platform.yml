@@ -7,14 +7,14 @@ on:
     paths:
       - 'base-r/**'
       - 'rstudio/**'
-      - '.github/workflows/arm.yml'
+      - '.github/workflows/multi-platform.yml'
   pull_request:
     branches:
       - main
     paths:
       - 'base-r/**'
       - 'rstudio/**'
-      - '.github/workflows/arm.yml'
+      - '.github/workflows/multi-platform.yml'
   schedule:
     - cron: '0 18 * * 0' # run Sundays at 18
 

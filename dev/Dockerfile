@@ -1,4 +1,4 @@
-FROM rocker/verse:4.5.2
+FROM rocker/verse:4.6.0
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
@@ -40,6 +40,10 @@ ENV TZ=Europe/Oslo
 # making proxy def (and other env vars) go all the way into Rstudio
 # console, based on
 # https://github.com/rocker-org/rocker-versioned/issues/91
+
+ARG GITHUB_PAT=
+ENV GITHUB_PAT=${GITHUB_PAT}
+
 ARG USERID=
 ENV USERID=${USERID}
 
