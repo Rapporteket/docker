@@ -2,6 +2,9 @@ FROM rapporteket/dev:weekly
 
 LABEL maintainer="Kevin Thon <kevin.otto.thon@helse-nord.no>"
 
+ARG GITHUB_PAT=
+ENV GITHUB_PAT=${GITHUB_PAT}
+
 # hadolint ignore=DL3008
 
 # add registry dev config and R pkg dependencies
