@@ -33,7 +33,6 @@ jobs:
           ablanor-dev: "ablanor-dev/**"
           noric-dev: "noric-dev/**"
           traume-dev: "traume-dev/**"
-          base-r-alpine: "base-r-alpine/**"
 
   push_to_registries:
     needs: changes

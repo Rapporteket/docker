@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'base-r/**'
+      - 'base-r-alpine/**'
       - 'rstudio/**'
       - '.github/workflows/multi-platform.yml'
   pull_request:
@@ -13,6 +14,7 @@ on:
       - main
     paths:
       - 'base-r/**'
+      - 'base-r-alpine/**'
       - 'rstudio/**'
       - '.github/workflows/multi-platform.yml'
   schedule:
@@ -32,6 +34,7 @@ jobs:
       matrix:
         config:
           - {name: base-r}
+          - {name: base-r-alpine}
           - {name: rstudio}
     name: ${{ matrix.config.name }}
     steps:
