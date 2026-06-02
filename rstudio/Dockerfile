@@ -42,8 +42,7 @@ ENV TZ=Europe/Oslo
 # making proxy def (and other env vars) go all the way into Rstudio
 # console, based on
 # https://github.com/rocker-org/rocker-versioned/issues/91
-ARG GITHUB_PAT=
-ENV GITHUB_PAT=${GITHUB_PAT}
+ARG GITHUB_PAT
 
 ARG CONFIG_PATH=/home/rstudio/rap_config
 ENV R_RAP_CONFIG_PATH=${CONFIG_PATH}

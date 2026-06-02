@@ -37,12 +37,11 @@ ENV LC_TIME=nb_NO.UTF-8
 RUN echo "LANG=\"nb_NO.UTF-8\"" > /etc/default/locale
 ENV TZ=Europe/Oslo
 
+ARG GITHUB_PAT
+
 # making proxy def (and other env vars) go all the way into Rstudio
 # console, based on
 # https://github.com/rocker-org/rocker-versioned/issues/91
-
-ARG GITHUB_PAT=
-ENV GITHUB_PAT=${GITHUB_PAT}
 
 ARG USERID=
 ENV USERID=${USERID}
