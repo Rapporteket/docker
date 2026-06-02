@@ -2,8 +2,7 @@ FROM rapporteket/dev:weekly
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
-ARG GITHUB_PAT=
-ENV GITHUB_PAT=${GITHUB_PAT}
+ARG GITHUB_PAT
 
 # add registry dev config and R pkg dependencies
 COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
