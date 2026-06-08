@@ -10,27 +10,33 @@ ENV LC_ALL=nb_NO.UTF-8
 ENV LANG=nb_NO.UTF-8
 
 ARG TARGETARCH
+ARG GITHUB_PAT
 
 RUN installr -d \
-    -t "cairo-dev gfortran" \
+    -t "gfortran curl-dev gcc musl-dev" \
     -a "cairo font-liberation" \
+           bookdown \
+           bslib \
+           DBI \
            digest \
            dplyr \
            DT \
-           magrittr \
-           pool \
+           jsonlite \
+           kableExtra \
+           knitr \
+           logger \
            readr \
            rlang \
            RMariaDB \
            rmarkdown \
+           sendmailR \
            shiny \
-           shinyjs \
            shinyalert \
-           shinycssloaders \
-           tibble \
-           yaml \
-           Cairo \
+           sship \
+           utils \
            ggplot2 \
+           remotes \
+  && R -e "remotes::install_github('Rapporteket/rapbase')" \
   && wget -q https://github.com/jgm/pandoc/releases/download/2.19.2/pandoc-2.19.2-linux-${TARGETARCH}.tar.gz \
   && tar xzf pandoc-2.19.2-linux-${TARGETARCH}.tar.gz \
   && mv pandoc-2.19.2/bin/* /usr/local/bin/ \
