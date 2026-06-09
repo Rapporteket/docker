@@ -2,10 +2,6 @@ FROM rhub/r-minimal:4.6.0
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
-# hadolint ignore=DL3018
-RUN apk add --no-cache --update-cache \
-        mariadb-connector-c-dev
-
 ENV LC_ALL=nb_NO.UTF-8
 ENV LANG=nb_NO.UTF-8
 
@@ -13,8 +9,8 @@ ARG TARGETARCH
 ARG GITHUB_PAT
 
 RUN installr -d \
-    -t "gfortran curl-dev gcc musl-dev" \
-    -a "cairo font-liberation" \
+     -t "cmake libuv-dev icu-dev libpng-dev fontconfig-dev freetype-dev fribidi-dev harfbuzz-dev libxml2-dev libx11-dev mariadb-dev curl-dev git cairo-dev" \
+     -a "mariadb-connector-c-dev libuv fontconfig harfbuzz fribidi" \
            bookdown \
            bslib \
            DBI \
@@ -36,6 +32,7 @@ RUN installr -d \
            utils \
            ggplot2 \
            remotes \
+           Cairo \
   && R -e "remotes::install_github('Rapporteket/rapbase')" \
   && wget -q https://github.com/jgm/pandoc/releases/download/2.19.2/pandoc-2.19.2-linux-${TARGETARCH}.tar.gz \
   && tar xzf pandoc-2.19.2-linux-${TARGETARCH}.tar.gz \
