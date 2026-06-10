@@ -33,6 +33,7 @@ jobs:
           ablanor-dev: "ablanor-dev/**"
           noric-dev: "noric-dev/**"
           traume-dev: "traume-dev/**"
+          base-r-alpine-latex: "base-r-alpine-latex/**"
 
   push_to_registries:
     needs: changes
