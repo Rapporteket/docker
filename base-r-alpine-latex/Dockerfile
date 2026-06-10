@@ -2,6 +2,12 @@ FROM rapporteket/base-r-alpine:main
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
+# for amd64 architecture
+ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:${PATH}
+
+# for arm64 architecture
+ENV PATH=/usr/local/texlive/bin/aarch64-linuxmusl/:${PATH}
+
 # hadolint ignore=DL3018
 RUN apk add --no-cache perl wget tar \
   && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
@@ -12,17 +18,9 @@ RUN apk add --no-cache perl wget tar \
                                -scheme scheme-basic \
                                -texdir /usr/local/texlive \
   && rm -rf install-tl-* \
-  && apk del tar
-
-# for amd64 architecture
-ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:${PATH}
-
-# for arm64 architecture
-ENV PATH=/usr/local/texlive/bin/aarch64-linuxmusl/:${PATH}
-
-RUN pdflatex --version
-
-RUN tlmgr update --self && tlmgr install \
+  && apk del tar \
+  && pdflatex --version \
+  && tlmgr update --self && tlmgr install \
         babel-norsk \
         beamer \
         bigintcalc \
