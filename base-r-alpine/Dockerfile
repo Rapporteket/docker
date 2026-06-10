@@ -39,5 +39,4 @@ RUN installr -d \
   && mv pandoc-2.19.2/bin/* /usr/local/bin/ \
   && rm -rf pandoc-2.19.2*
 
-
 CMD ["R"]

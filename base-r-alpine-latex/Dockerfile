@@ -5,7 +5,7 @@ LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 # hadolint ignore=DL3018
 RUN apk add --no-cache perl wget tar \
   && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
-  && mkdir project && tar -xf install-tl-unx.tar.gz --one-top-level --strip-components=1 \
+  && tar -xf install-tl-unx.tar.gz --one-top-level --strip-components=1 \
   && install-tl-unx/install-tl -no-doc-install \
                                -no-src-install \
                                -no-interaction \
