@@ -5,15 +5,14 @@ LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nor
 # hadolint ignore=DL3018
 RUN apk add --no-cache perl wget tar \
   && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
-  && tar -xf install-tl-unx.tar.gz \
-  && cd install-tl-20* \
-  && ./install-tl -no-doc-install \
-                  -no-src-install \
-                  -no-interaction \
-                  -scheme scheme-basic \
-                  -texdir /usr/local/texlive \
-  && cd .. && rm -rf install-tl-* \
-  && apk del perl wget tar
+  && mkdir project && tar -xf install-tl-unx.tar.gz --one-top-level --strip-components=1 \
+  && install-tl-unx/install-tl -no-doc-install \
+                               -no-src-install \
+                               -no-interaction \
+                               -scheme scheme-basic \
+                               -texdir /usr/local/texlive \
+  && rm -rf install-tl-* \
+  && apk del tar
 
 # for amd64 architecture
 ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:${PATH}
