@@ -10,7 +10,7 @@ ARG GITHUB_PAT
 
 RUN installr -d \
      -t "cmake libuv-dev icu-dev libpng-dev fontconfig-dev freetype-dev fribidi-dev harfbuzz-dev libxml2-dev libx11-dev mariadb-dev curl-dev git cairo-dev" \
-     -a "mariadb-connector-c-dev libuv fontconfig harfbuzz fribidi libxml2 cairo harfbuzz-icu font-liberation mariadb-client" \
+     -a "mariadb-connector-c-dev libuv fontconfig harfbuzz fribidi libxml2 cairo harfbuzz-icu font-liberation mariadb-client pandoc-cli" \
            bookdown \
            bslib \
            DBI \
@@ -33,10 +33,6 @@ RUN installr -d \
            ggplot2 \
            remotes \
            Cairo \
-  && R -e "remotes::install_github('Rapporteket/rapbase')" \
-  && wget -q https://github.com/jgm/pandoc/releases/download/2.19.2/pandoc-2.19.2-linux-${TARGETARCH}.tar.gz \
-  && tar xzf pandoc-2.19.2-linux-${TARGETARCH}.tar.gz \
-  && mv pandoc-2.19.2/bin/* /usr/local/bin/ \
-  && rm -rf pandoc-2.19.2*
+  && R -e "remotes::install_github('Rapporteket/rapbase')"
 
 CMD ["R"]
