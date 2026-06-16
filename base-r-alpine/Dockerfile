@@ -1,8 +1,10 @@
+FROM pandoc/minimal:latest AS pandoc-source
+
 FROM rhub/r-minimal:4.6.0
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
-COPY --from=pandoc/minimal:latest /usr/local/bin/pandoc /usr/local/bin/pandoc
+COPY --from=pandoc-source /usr/local/bin/pandoc /usr/local/bin/pandoc
 
 ENV LC_ALL=nb_NO.UTF-8
 ENV LANG=nb_NO.UTF-8
