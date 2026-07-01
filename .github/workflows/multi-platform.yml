@@ -38,7 +38,6 @@ jobs:
       push: ${{ github.event_name != 'pull_request' }}
       platforms: linux/amd64,linux/arm64
       context: ./base-r/.
-      file: ./base-r/Dockerfile
       cache: true
       meta-images: rapporteket/base-r
       meta-tags: |
