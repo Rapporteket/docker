@@ -28,7 +28,12 @@ concurrency:
 
 jobs:
   push_base_r:
-    name: Push Docker image to docker hub
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: base-r-alpine}
+    name: Push ${{ matrix.config.name }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
       contents: read
@@ -37,9 +42,9 @@ jobs:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
       platforms: linux/amd64,linux/arm64
-      context: ./base-r/.
+      context: ./${{ matrix.config.name }}/.
       cache: true
-      meta-images: rapporteket/base-r
+      meta-images: rapporteket/${{ matrix.config.name }}
       meta-tags: |
         type=ref,event=branch
         type=schedule,pattern=weekly
