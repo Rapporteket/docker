@@ -30,8 +30,6 @@ jobs:
   push_base_r:
     name: base-r
     uses: docker/github-builder/.github/workflows/build.yml@v1
-    env:
-      name: base-r
     permissions:
       contents: read
       id-token: write
@@ -39,64 +37,10 @@ jobs:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
       platforms: linux/amd64,linux/arm64
-      context: ./${{ name }}/.
-      file: ./${{ name }}/Dockerfile
+      context: ./${{ github.workflow }}/.
+      file: ./${{ github.workflow }}/Dockerfile
       cache: true
-      meta-images: rapporteket/${{ name }}
-      meta-tags: |
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
-        type=ref,event=branch
-        type=schedule,pattern=weekly
-      build-args: |
-        GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_base_r-alpine:
-    name: base-r-alpine
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    env:
-      name: base-r-alpine
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64,linux/arm64
-      context: ./${{ name }}/.
-      file: ./${{ name }}/Dockerfile
-      cache: true
-      meta-images: rapporteket/${{ name }}
-      meta-tags: |
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
-        type=ref,event=branch
-        type=schedule,pattern=weekly
-      build-args: |
-        GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_rstudio:
-    name: rstudio
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    env:
-      name: rstudio
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64,linux/arm64
-      context: ./${{ name }}/.
-      file: ./${{ name }}/Dockerfile
-      cache: true
-      meta-images: rapporteket/${{ name }}
+      meta-images: rapporteket/${{ github.workflow }}
       meta-tags: |
         type=semver,pattern={{major}}.{{minor}}.{{patch}}
         type=ref,event=branch
