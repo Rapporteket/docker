@@ -42,9 +42,8 @@ jobs:
       meta-images: rapporteket/base-r
       meta-tags: |
         type=ref,event=branch
-        type=ref,event=pr
-        type=semver,pattern={{version}}
-        type=semver,pattern={{major}}.{{minor}}
+        type=schedule,pattern=weekly
+        type=semver,pattern={{major}}.{{minor}}.{{patch}}
     secrets:
       registry-auths: |
         - registry: docker.io
