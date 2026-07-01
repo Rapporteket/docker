@@ -27,13 +27,13 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  push_base_r:
+  push_to_registries:
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {name: base-r-alpine}
           - {name: base-r}
+          - {name: base-r-alpine}
           - {name: rstudio}
     name: Push ${{ matrix.config.name }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
