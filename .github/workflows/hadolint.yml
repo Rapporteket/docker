@@ -1,0 +1,39 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+name: Lint Dockerfiles
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint_dockerfiles:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: base-r}
+          - {name: base-r-alpine}
+          - {name: base-r-alpine-latex}
+          - {name: rstudio}
+          - {name: dev}
+          - {name: ltmv-dev}
+          - {name: smerte-dev}
+          - {name: ablanor-dev}
+          - {name: noric-dev}
+          - {name: traume-dev}
+    name: ${{ matrix.config.name }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v7
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.3.0
+        with:
+          dockerfile: "${{ matrix.config.name }}/Dockerfile"

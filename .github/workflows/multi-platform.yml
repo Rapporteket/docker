@@ -40,10 +40,6 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v7
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.3.0
-        with:
-          dockerfile: "${{ matrix.config.name }}/Dockerfile"
       - name: Prepare tags
         id: docker_meta
         uses: docker/metadata-action@v6
