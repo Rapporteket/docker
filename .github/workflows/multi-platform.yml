@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   push_base_r:
+    name: Push Docker image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
       contents: read
