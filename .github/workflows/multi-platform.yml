@@ -33,6 +33,8 @@ jobs:
       matrix:
         config:
           - {name: base-r-alpine}
+          - {name: base-r}
+          - {name: rstudio}
     name: Push ${{ matrix.config.name }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
