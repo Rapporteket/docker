@@ -76,8 +76,6 @@ RUN /rocker_scripts/install_shiny_server.sh \
     && rm /srv/shiny-server/index.html \
     && rm -rf /srv/shiny-server/sample-apps
 
-ADD --chown=root:root rapShinyApps.tar.gz /srv/shiny-server/
-
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
 RUN touch /home/rstudio/.Renviron \
     && echo "TZ=${TZ}" > /home/rstudio/.Renviron \
