@@ -42,11 +42,10 @@ jobs:
       cache: true
       meta-images: rapporteket/base-r
       meta-tags: |
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
         type=ref,event=branch
-        type=schedule,pattern=weekly
-      build-args: |
-        GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
+        type=ref,event=pr
+        type=semver,pattern={{version}}
+        type=semver,pattern={{major}}.{{minor}}
     secrets:
       registry-auths: |
         - registry: docker.io
