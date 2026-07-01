@@ -27,27 +27,76 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  push_to_registries:
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {name: base-r}
-          - {name: base-r-alpine}
-          - {name: rstudio}
-    name: ${{ matrix.config.name }}
+  push_base_r:
+    name: base-r
+    env:
+      name: base-r
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
-      contents: read # to fetch the repository content
-      id-token: write # for signing attestation(s) with GitHub OIDC Token
+      contents: read
+      id-token: write
     with:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
       platforms: linux/amd64,linux/arm64
-      context: ./${{ matrix.config.name }}/.
-      file: ./${{ matrix.config.name }}/Dockerfile
+      context: ./${{ name }}/.
+      file: ./${{ name }}/Dockerfile
       cache: true
-      meta-images: rapporteket/${{ matrix.config.name }}
+      meta-images: rapporteket/${{ name }}
+      meta-tags: |
+        type=semver,pattern={{major}}.{{minor}}.{{patch}}
+        type=ref,event=branch
+        type=schedule,pattern=weekly
+      build-args: |
+        GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  push_base_r-alpine:
+    name: base-r-alpine
+    env:
+      name: base-r-alpine
+    uses: docker/github-builder/.github/workflows/build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: ${{ github.event_name != 'pull_request' }}
+      platforms: linux/amd64,linux/arm64
+      context: ./${{ name }}/.
+      file: ./${{ name }}/Dockerfile
+      cache: true
+      meta-images: rapporteket/${{ name }}
+      meta-tags: |
+        type=semver,pattern={{major}}.{{minor}}.{{patch}}
+        type=ref,event=branch
+        type=schedule,pattern=weekly
+      build-args: |
+        GITHUB_PAT=${{ secrets.GITHUB_TOKEN }}
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  push_rstudio:
+    name: rstudio
+    env:
+      name: rstudio
+    uses: docker/github-builder/.github/workflows/build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: ${{ github.event_name != 'pull_request' }}
+      platforms: linux/amd64,linux/arm64
+      context: ./${{ name }}/.
+      file: ./${{ name }}/Dockerfile
+      cache: true
+      meta-images: rapporteket/${{ name }}
       meta-tags: |
         type=semver,pattern={{major}}.{{minor}}.{{patch}}
         type=ref,event=branch
