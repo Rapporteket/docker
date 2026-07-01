@@ -28,7 +28,6 @@ concurrency:
 
 jobs:
   push_base_r:
-    name: base-r
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
       contents: read
@@ -37,10 +36,10 @@ jobs:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
       platforms: linux/amd64,linux/arm64
-      context: ./${{ github.workflow }}/.
-      file: ./${{ github.workflow }}/Dockerfile
+      context: ./base-r/.
+      file: ./base-r/Dockerfile
       cache: true
-      meta-images: rapporteket/${{ github.workflow }}
+      meta-images: rapporteket/base-r
       meta-tags: |
         type=semver,pattern={{major}}.{{minor}}.{{patch}}
         type=ref,event=branch
