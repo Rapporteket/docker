@@ -1,0 +1,3 @@
+scan:
+  skip-version-check: true
+  disable-telemetry: true

@@ -1,0 +1,60 @@
+on:
+  release:
+    types: [published]
+  push:
+    branches:
+      - main
+    paths:
+      - 'base-r/**'
+      - 'base-r-alpine/**'
+      - '.github/workflows/trivy.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'base-r/**'
+      - 'base-r-alpine/**'
+      - '.github/workflows/trivy.yml'
+  schedule:
+    - cron: '0 10 * * 0' # run Sundays at 10
+
+name: Trivy Docker image
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  trivy:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: base-r}
+          - {name: base-r-alpine}
+    name: Trivy ${{ matrix.config.name }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Build an image from Dockerfile
+        run: docker build -t ${{ matrix.config.name }}:${{ github.sha }} ./${{ matrix.config.name }}/.
+      - name: Run Trivy vulnerability scanner, all levels
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8
+        with:
+          image-ref: '${{ matrix.config.name }}:${{ github.sha }}'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: false
+          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+          trivy-config: 'trivy.yaml'
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8
+        with:
+          image-ref: '${{ matrix.config.name }}:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL'
+          trivy-config: 'trivy.yaml'
