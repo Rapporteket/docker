@@ -39,12 +39,22 @@ jobs:
         uses: actions/checkout@v7
       - name: Build an image from Dockerfile
         run: docker build -t ${{ matrix.config.name }}:${{ github.sha }} ./${{ matrix.config.name }}/.
+      - name: Run Trivy vulnerability scanner, all levels
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8
+        with:
+          image-ref: '${{ matrix.config.name }}:${{ github.sha }}'
+          format: 'table'
+          exit-code: '0'
+          ignore-unfixed: false
+          severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'
+          trivy_flags: '--skip-version-check'
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8
         with:
           image-ref: '${{ matrix.config.name }}:${{ github.sha }}'
           format: 'table'
           exit-code: '1'
-          ignore-unfixed: true
+          ignore-unfixed: false
           vuln-type: 'os,library'
           severity: 'CRITICAL'
+          trivy_flags: '--skip-version-check'
