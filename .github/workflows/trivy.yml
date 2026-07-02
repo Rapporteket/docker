@@ -1,0 +1,30 @@
+name: build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {name: base-r}
+          - {name: base-r-alpine}
+    name: Trivy ${{ matrix.config.name }}
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+      - name: Build an image from Dockerfile
+        run: docker build -t ${{ matrix.config.name }}:${{ github.sha }} ./${{ matrix.config.name }}/.
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: '${{ matrix.config.name }}:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
