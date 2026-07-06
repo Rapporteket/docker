@@ -1,4 +1,4 @@
-FROM rapporteket/base-r-alpine:weekly
+FROM rapporteket/base-r-alpine:main
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 

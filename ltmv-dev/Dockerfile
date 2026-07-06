@@ -1,4 +1,4 @@
-FROM rapporteket/dev:weekly
+FROM rapporteket/dev:main
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
