@@ -59,7 +59,7 @@ RUN R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos
     && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \
     && chmod ugo+rw ${CONFIG_PATH}/* \
-    && wget -q https://tlnet.yihui.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+    && wget -q https://tlnet.yihui.org/install-tl-unx.tar.gz \
     && tar -xf install-tl-unx.tar.gz \
     && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
                                                               -no-src-install \

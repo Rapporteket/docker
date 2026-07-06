@@ -10,7 +10,7 @@ ENV PATH=/usr/local/texlive/bin/aarch64-linuxmusl/:${PATH}
 
 # hadolint ignore=DL3018
 RUN apk add --no-cache perl wget tar \
-  && wget -q https://tlnet.yihui.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+  && wget -q https://tlnet.yihui.org/install-tl-unx.tar.gz \
   && tar -xf install-tl-unx.tar.gz --one-top-level --strip-components=1 \
   && install-tl-unx/install-tl -no-doc-install \
                                -no-src-install \
