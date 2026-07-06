@@ -37,7 +37,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
     remotes \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 
-    && wget --tries=5 --timeout=30 http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+    && wget -q --tries=5 --timeout=30 http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
     && tar -xf install-tl-unx.tar.gz \
     && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
                                                               -no-src-install \
