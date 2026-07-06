@@ -66,6 +66,7 @@ RUN R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos
                                                               -no-interaction \
                                                               -scheme scheme-basic \
                                                               -texdir /usr/local/texlive \
+                                                              -repository https://tlnet.yihui.org/ \
     && rm -rf install-tl-*
 
 # for amd64 architecture

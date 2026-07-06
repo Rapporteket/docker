@@ -44,6 +44,7 @@ RUN install2.r --error --skipinstalled --ncpus -1 \
                                                               -no-interaction \
                                                               -scheme scheme-basic \
                                                               -texdir /usr/local/texlive \
+                                                              -repository https://tlnet.yihui.org/ \
     && rm -rf install-tl-*
 
 # for amd64 architecture

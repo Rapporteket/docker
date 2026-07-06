@@ -17,6 +17,7 @@ RUN apk add --no-cache perl wget tar \
                                -no-interaction \
                                -scheme scheme-basic \
                                -texdir /usr/local/texlive \
+                               -repository https://tlnet.yihui.org/ \
   && rm -rf install-tl-* \
   && apk del tar \
   && pdflatex --version \
