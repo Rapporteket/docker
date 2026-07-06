@@ -1,4 +1,4 @@
-FROM rapporteket/dev:weekly
+FROM rapporteket/dev:main
 
 LABEL maintainer="Kevin Thon <kevin.otto.thon@helse-nord.no>"
 
