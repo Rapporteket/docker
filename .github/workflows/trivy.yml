@@ -38,7 +38,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
       - name: Build an image from Dockerfile
-        run: docker build -t ${{ matrix.config.name }}:${{ github.sha }} ./${{ matrix.config.name }}/.
+        run: |
+          docker build \
+          -t ${{ matrix.config.name }}:${{ github.sha }} \
+          --secret id=github_pat,env=${{ secrets.GITHUB_TOKEN }} \
+          ./${{ matrix.config.name }}/.
       - name: Run Trivy vulnerability scanner, all levels
         uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8
         with:

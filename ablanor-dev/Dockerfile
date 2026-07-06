@@ -2,10 +2,9 @@ FROM rapporteket/dev:main
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.steindal@helse-nord.no>"
 
-ARG GITHUB_PAT
-
 COPY --chown=rstudio:rstudio db.yml /home/rstudio/
-RUN cat /home/rstudio/db.yml >> /home/rstudio/dbConfig.yml \
+RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
+    cat /home/rstudio/db.yml >> /home/rstudio/dbConfig.yml \
     && rm /home/rstudio/db.yml \
     && chmod ugo+rw /home/rstudio/* \
     && R -e "install.packages(c('binom', \
