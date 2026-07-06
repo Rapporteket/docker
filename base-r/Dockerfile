@@ -8,7 +8,7 @@ ARG GITHUB_PAT
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # install linux-libc-dev to get latest version, to fix critical CVE. rm later if not needed.
     linux-libc-dev \
-    # libuv1-dev is now needed. See https://github.com/Rapporteket/docker/issues/207. rm later if not needed.
+    # libuv1-dev is now needed by fs. See https://github.com/Rapporteket/docker/issues/207.
     libuv1-dev \
     pandoc \
     libmariadb-dev \
