@@ -50,6 +50,7 @@ jobs:
       meta-tags: |
         type=ref,event=branch
         type=schedule,pattern=weekly
+        type=schedule,pattern=main
         type=semver,pattern={{major}}.{{minor}}.{{patch}}
     secrets:
       registry-auths: |
