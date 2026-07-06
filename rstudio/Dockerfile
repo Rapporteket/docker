@@ -42,7 +42,6 @@ ENV TZ=Europe/Oslo
 # making proxy def (and other env vars) go all the way into Rstudio
 # console, based on
 # https://github.com/rocker-org/rocker-versioned/issues/91
-ARG GITHUB_PAT
 
 ARG CONFIG_PATH=/home/rstudio/rap_config
 ENV R_RAP_CONFIG_PATH=${CONFIG_PATH}
@@ -54,7 +53,8 @@ ENV ROOT=TRUE
 
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
+RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
+    R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release', dependencies = TRUE)" \
     && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \

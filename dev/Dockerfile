@@ -37,8 +37,6 @@ ENV LC_TIME=nb_NO.UTF-8
 RUN echo "LANG=\"nb_NO.UTF-8\"" > /etc/default/locale
 ENV TZ=Europe/Oslo
 
-ARG GITHUB_PAT
-
 # making proxy def (and other env vars) go all the way into Rstudio
 # console, based on
 # https://github.com/rocker-org/rocker-versioned/issues/91
@@ -77,7 +75,8 @@ RUN /rocker_scripts/install_shiny_server.sh \
     && rm -rf /srv/shiny-server/sample-apps
 
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
-RUN touch /home/rstudio/.Renviron \
+RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
+    touch /home/rstudio/.Renviron \
     && echo "TZ=${TZ}" > /home/rstudio/.Renviron \
     && echo "http_proxy=${PROXY}" >> /home/rstudio/.Renviron \
     && echo "https_proxy=${PROXY}" >> /home/rstudio/.Renviron \
