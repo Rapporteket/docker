@@ -59,13 +59,14 @@ RUN R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos
     && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \
     && chmod ugo+rw ${CONFIG_PATH}/* \
-    && wget -q http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz \
+    && wget -q https://tlnet.yihui.org/install-tl-unx.tar.gz \
     && tar -xf install-tl-unx.tar.gz \
     && "$(tar -tf install-tl-unx.tar.gz | head -1)"install-tl -no-doc-install \
                                                               -no-src-install \
                                                               -no-interaction \
                                                               -scheme scheme-basic \
                                                               -texdir /usr/local/texlive \
+                                                              -repository https://tlnet.yihui.org/ \
     && rm -rf install-tl-*
 
 # for amd64 architecture
@@ -74,7 +75,8 @@ ENV PATH=/usr/local/texlive/bin/x86_64-linux/:${PATH}
 # for arm64 architecture
 ENV PATH=/usr/local/texlive/bin/aarch64-linux/:${PATH}
 
-RUN tlmgr update --self --all \
+RUN tlmgr option repository https://tlnet.yihui.org/ \
+    && tlmgr update --self --all \
     && tlmgr install \
         amsmath \
         babel-norsk \
