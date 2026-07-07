@@ -72,6 +72,7 @@ jobs:
           context: ./${{ matrix.image }}/.
           file: ./${{ matrix.image }}/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
+          pull: true
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
           secrets: |
