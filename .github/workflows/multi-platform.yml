@@ -43,7 +43,6 @@ jobs:
     with:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
-      pull: true
       platforms: linux/amd64,linux/arm64
       context: ./${{ matrix.config.name }}/.
       cache: true
