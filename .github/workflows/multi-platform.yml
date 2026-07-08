@@ -46,8 +46,6 @@ jobs:
       platforms: linux/amd64,linux/arm64
       context: ./${{ matrix.config.name }}/.
       cache: true
-      secrets: |
-        "github_pat=${{ secrets.GITHUB_TOKEN }}"
       meta-images: rapporteket/${{ matrix.config.name }}
       meta-tags: |
         type=ref,event=branch
