@@ -36,7 +36,7 @@ jobs:
           - {name: base-r-alpine}
           - {name: rstudio}
     name: Push ${{ matrix.config.name }} image to docker hub
-    uses: docker/github-builder/.github/workflows/build.yml@v1
+    uses: docker/crazy-max/.github/workflows/build.yml@f81277ef6855996c54092c0099db0aad9ed576ef
     permissions:
       contents: read
       id-token: write
