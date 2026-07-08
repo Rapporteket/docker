@@ -57,3 +57,7 @@ jobs:
         - registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      build-secrets: |
+        - id: github_pat
+          env: GITHUB_PAT
+          value: ${{ secrets.GITHUB_TOKEN }}
