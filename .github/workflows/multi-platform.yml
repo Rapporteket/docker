@@ -37,8 +37,6 @@ jobs:
           - {name: rstudio}
     name: Push ${{ matrix.config.name }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     permissions:
       contents: read
       id-token: write
@@ -48,7 +46,7 @@ jobs:
       platforms: linux/amd64,linux/arm64
       context: ./${{ matrix.config.name }}/.
       cache: true
-      build-args: GITHUB_PAT=${{ GITHUB_PAT }}
+      build-args: GITHUB_PAT=${{ github.token }}
       meta-images: rapporteket/${{ matrix.config.name }}
       meta-tags: |
         type=ref,event=branch
