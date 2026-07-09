@@ -4,19 +4,9 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'base-r/**'
-      - 'base-r-alpine/**'
-      - 'rstudio/**'
-      - '.github/workflows/multi-platform.yml'
   pull_request:
     branches:
       - main
-    paths:
-      - 'base-r/**'
-      - 'base-r-alpine/**'
-      - 'rstudio/**'
-      - '.github/workflows/multi-platform.yml'
   schedule:
     - cron: '0 18 * * 0' # run Sundays at 18
 
@@ -27,15 +17,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  push_to_registries:
+  push_base_to_registries:
     strategy:
       fail-fast: false
       matrix:
-        config:
-          - {name: base-r}
-          - {name: base-r-alpine}
-          - {name: rstudio}
-    name: Push ${{ matrix.config.name }} image to docker hub
+        image: [base-r, base-r-alpine, rstudio]
+    name: Push ${{ matrix.image }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
       contents: read
@@ -44,10 +31,95 @@ jobs:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
       platforms: linux/amd64,linux/arm64
-      context: ./${{ matrix.config.name }}/.
+      context: ./${{ matrix.image }}/.
       cache: true
       build-args: GITHUB_PAT=${{ github.token }}
-      meta-images: rapporteket/${{ matrix.config.name }}
+      meta-images: rapporteket/${{ matrix.image }}
+      meta-tags: |
+        type=ref,event=branch
+        type=schedule,pattern=weekly
+        type=schedule,pattern=main
+        type=semver,pattern={{major}}.{{minor}}.{{patch}}
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  push_dev_to_registry:
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [dev]
+    name: Push ${{ matrix.image }} image to docker hub
+    uses: docker/github-builder/.github/workflows/build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: ${{ github.event_name != 'pull_request' }}
+      platforms: linux/amd64
+      context: ./${{ matrix.image }}/.
+      cache: true
+      build-args: GITHUB_PAT=${{ github.token }}
+      meta-images: rapporteket/${{ matrix.image }}
+      meta-tags: |
+        type=ref,event=branch
+        type=schedule,pattern=weekly
+        type=schedule,pattern=main
+        type=semver,pattern={{major}}.{{minor}}.{{patch}}
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  push_other_devs_to_registry:
+    needs: push_dev_to_registry
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev]
+    name: Push ${{ matrix.image }} image to docker hub
+    uses: docker/github-builder/.github/workflows/build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: ${{ github.event_name != 'pull_request' }}
+      platforms: linux/amd64
+      context: ./${{ matrix.image }}/.
+      cache: true
+      build-args: GITHUB_PAT=${{ github.token }}
+      meta-images: rapporteket/${{ matrix.image }}
+      meta-tags: |
+        type=ref,event=branch
+        type=schedule,pattern=weekly
+        type=schedule,pattern=main
+        type=semver,pattern={{major}}.{{minor}}.{{patch}}
+    secrets:
+      registry-auths: |
+        - registry: docker.io
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+  push_alpine_latex_to_registry:
+    needs: push_base_to_registries
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [base-r-alpine-latex]
+    name: Push ${{ matrix.image }} image to docker hub
+    uses: docker/github-builder/.github/workflows/build.yml@v1
+    permissions:
+      contents: read
+      id-token: write
+    with:
+      output: image
+      push: ${{ github.event_name != 'pull_request' }}
+      platforms: linux/amd64
+      context: ./${{ matrix.image }}/.
+      cache: true
+      meta-images: rapporteket/${{ matrix.image }}
       meta-tags: |
         type=ref,event=branch
         type=schedule,pattern=weekly

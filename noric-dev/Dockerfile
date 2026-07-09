@@ -1,12 +1,11 @@
 FROM rapporteket/dev:main
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+ARG GITHUB_PAT
 
 # add registry dev config and R pkg dependencies
 COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
 COPY --chown=rstudio:rstudio rapbase.yml /home/rstudio/rap_config/
-RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
-    cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
+RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
     && cat /home/rstudio/rap_config/rapbase.yml >> /home/rstudio/rap_config/rapbaseConfig.yml \
     && rm /home/rstudio/rap_config/db.yml \
     && rm /home/rstudio/rap_config/rapbase.yml \

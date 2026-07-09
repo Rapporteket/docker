@@ -1,7 +1,5 @@
 FROM rapporteket/base-r-alpine:main
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
-
 # for amd64 architecture
 ENV PATH=/usr/local/texlive/bin/x86_64-linuxmusl:${PATH}
 

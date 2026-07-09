@@ -1,7 +1,5 @@
 FROM rocker/verse:4.6.1
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 # system libraries of general use
@@ -74,9 +72,10 @@ RUN /rocker_scripts/install_shiny_server.sh \
     && rm /srv/shiny-server/index.html \
     && rm -rf /srv/shiny-server/sample-apps
 
+ARG GITHUB_PAT
+
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
-RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
-    touch /home/rstudio/.Renviron \
+RUN touch /home/rstudio/.Renviron \
     && echo "TZ=${TZ}" > /home/rstudio/.Renviron \
     && echo "http_proxy=${PROXY}" >> /home/rstudio/.Renviron \
     && echo "https_proxy=${PROXY}" >> /home/rstudio/.Renviron \

@@ -1,7 +1,5 @@
 FROM rocker/r-ver:4.6.1
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
-
 ARG GITHUB_PAT
 
 # hadolint ignore=DL3008
