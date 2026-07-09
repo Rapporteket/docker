@@ -1,12 +1,9 @@
 FROM rapporteket/dev:main
 
-LABEL maintainer="Kevin Thon <kevin.otto.thon@helse-nord.no>"
-
-# hadolint ignore=DL3008
+ARG GITHUB_PAT
 
 # add registry dev config and R pkg dependencies
 COPY --chown=rstudio:rstudio db.yml /home/rstudio/rap_config/
-RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
-    cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
+RUN cat /home/rstudio/rap_config/db.yml >> /home/rstudio/rap_config/dbConfig.yml \
     && rm /home/rstudio/rap_config/db.yml \
     && R -e "remotes::install_github(c('Rapporteket/smerte', 'Rapporteket/rapbase@main'))"
