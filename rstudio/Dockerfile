@@ -51,10 +51,11 @@ RUN mkdir -p ${CONFIG_PATH} \
 # add rstudio user to root group  and enable shiny server
 ENV ROOT=TRUE
 
+ARG GITHUB_PAT
+
 ## provide users rstudio and shiny with corresponding environmental settings, install and config
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
-    R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
+RUN R -e "install.packages(c('remotes', 'lifecycle', 'testthat', 'lintr'), repos='https://cloud.r-project.org/')" \
     && R -e "remotes::install_github('rapporteket/rapbase@*release', dependencies = TRUE)" \
     && R -e "file.copy(system.file(c('rapbaseConfig.yml'), package = 'rapbase'), Sys.getenv('R_RAP_CONFIG_PATH'))" \
     && chown rstudio:rstudio ${CONFIG_PATH}/* \
