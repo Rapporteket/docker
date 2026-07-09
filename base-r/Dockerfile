@@ -2,6 +2,8 @@ FROM rocker/r-ver:4.6.1
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 
+ARG GITHUB_PAT
+
 # hadolint ignore=DL3008
 RUN apt-get update && apt-get install -y --no-install-recommends \
 # install linux-libc-dev to get latest version, to fix critical CVE. rm later if not needed.
@@ -31,8 +33,7 @@ ENV TZ=Europe/Oslo
 
 # install R package dependencies and TinyTeX
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
-    install2.r --error --skipinstalled --ncpus -1 \
+RUN install2.r --error --skipinstalled --ncpus -1 \
     remotes \
     && R -e "remotes::install_github('rapporteket/rapbase@*release')"\
     && rm -rf /tmp/downloaded_packages \ 

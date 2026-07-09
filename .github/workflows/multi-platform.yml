@@ -46,6 +46,7 @@ jobs:
       platforms: linux/amd64,linux/arm64
       context: ./${{ matrix.config.name }}/.
       cache: true
+      build-args: GITHUB_PAT=${{ github.token }}
       meta-images: rapporteket/${{ matrix.config.name }}
       meta-tags: |
         type=ref,event=branch
