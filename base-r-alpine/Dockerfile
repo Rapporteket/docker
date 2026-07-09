@@ -24,6 +24,7 @@ RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
            jsonlite \
            kableExtra \
            knitr \
+           plotly \
            logger \
            readr \
            rlang \
@@ -33,6 +34,7 @@ RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
            shiny \
            shinyalert \
            sship \
+           tidyr \
            utils \
            ggplot2 \
            remotes \
