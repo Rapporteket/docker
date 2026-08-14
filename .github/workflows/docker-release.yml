@@ -10,7 +10,6 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {name: dev}
           - {name: base-r-alpine-latex}
     name: ${{ matrix.config.name }}
     steps:

@@ -27,7 +27,6 @@ jobs:
       id: filter
       with:
         filters: |
-          dev: "dev/**"
           ltmv-dev: "ltmv-dev/**"
           smerte-dev: "smerte-dev/**"
           ablanor-dev: "ablanor-dev/**"
