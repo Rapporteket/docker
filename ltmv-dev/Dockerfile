@@ -1,4 +1,4 @@
-FROM rapporteket/dev:main
+FROM rapporteket/rstudio:main
 
 LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
 

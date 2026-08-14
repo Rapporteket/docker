@@ -1,4 +1,4 @@
-FROM rapporteket/dev:main
+FROM rapporteket/rstudio:main
 
 LABEL maintainer="Kevin Thon <kevin.otto.thon@helse-nord.no>"
 
