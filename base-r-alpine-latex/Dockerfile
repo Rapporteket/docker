@@ -8,7 +8,6 @@ COPY --from=pandoc-source /usr/local/bin/pandoc /usr/local/bin/pandoc
 
 ENV LC_ALL=nb_NO.UTF-8
 ENV LANG=nb_NO.UTF-8
-ENV MARIADB_TLS_DISABLE_PEER_VERIFICATION=1
 
 ARG TARGETARCH
 ARG GITHUB_PAT
