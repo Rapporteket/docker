@@ -22,6 +22,7 @@ RUN installr -d \
            jsonlite \
            kableExtra \
            knitr \
+           plotly \
            logger \
            readr \
            rlang \
@@ -31,6 +32,7 @@ RUN installr -d \
            shiny \
            shinyalert \
            sship \
+           tidyr \
            utils \
            ggplot2 \
            remotes \

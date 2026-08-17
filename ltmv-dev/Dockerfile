@@ -1,4 +1,4 @@
-FROM rapporteket/dev:main
+FROM rapporteket/rstudio:main
 
 ARG GITHUB_PAT
 

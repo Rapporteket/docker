@@ -42,6 +42,7 @@ jobs:
           docker build \
           -t ${{ matrix.config.name }}:${{ github.sha }} \
           --secret id=github_pat,env=${{ secrets.GITHUB_TOKEN }} \
+          --build-arg GITHUB_PAT=${{ github.token }} \
           --pull \
           ./${{ matrix.config.name }}/.
       - name: Run Trivy vulnerability scanner, all levels
