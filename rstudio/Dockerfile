@@ -1,7 +1,5 @@
 FROM rocker/tidyverse:4.6.1
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
-
 ENV DEBIAN_FRONTEND=noninteractive
 
 # system libraries of general use

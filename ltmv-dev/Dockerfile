@@ -1,6 +1,5 @@
 FROM rapporteket/rstudio:main
 
-LABEL maintainer="Arnfinn Hykkerud Steindal <arnfinn.hykkerud.steindal@helse-nord.no>"
+ARG GITHUB_PAT
 
-RUN --mount=type=secret,id=github_pat,env=GITHUB_PAT \
-    R -e "remotes::install_github('Rapporteket/ltmv', dependencies = TRUE)"
+RUN R -e "remotes::install_github('Rapporteket/ltmv', dependencies = TRUE)"
