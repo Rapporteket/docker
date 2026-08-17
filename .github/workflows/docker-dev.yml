@@ -10,18 +10,18 @@ on:
   schedule:
     - cron: '0 18 * * 0' # run Sundays at 18
 
-name: Publish Docker image, both arm and amd
+name: Publish RStudio Docker images
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  push_base_to_registries:
+  push_rstudio_to_registry:
     strategy:
       fail-fast: false
       matrix:
-        image: [base-r, base-r-alpine, rstudio]
+        image: [rstudio]
     name: Push ${{ matrix.image }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
@@ -45,12 +45,12 @@ jobs:
         - registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_amd64only_to_registry:
-    needs: push_base_to_registries
+  push_devs_to_registry:
+    needs: push_rstudio_to_registry
     strategy:
       fail-fast: false
       matrix:
-        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev, base-r-alpine-latex]
+        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev]
     name: Push ${{ matrix.image }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
