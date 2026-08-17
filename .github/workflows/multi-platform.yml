@@ -45,69 +45,12 @@ jobs:
         - registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_dev_to_registry:
-    strategy:
-      fail-fast: false
-      matrix:
-        image: [dev]
-    name: Push ${{ matrix.image }} image to docker hub
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64
-      context: ./${{ matrix.image }}/.
-      cache: true
-      build-args: GITHUB_PAT=${{ github.token }}
-      meta-images: rapporteket/${{ matrix.image }}
-      meta-tags: |
-        type=ref,event=branch
-        type=schedule,pattern=weekly
-        type=schedule,pattern=main
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_other_devs_to_registry:
-    needs: push_dev_to_registry
-    strategy:
-      fail-fast: false
-      matrix:
-        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev]
-    name: Push ${{ matrix.image }} image to docker hub
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64
-      context: ./${{ matrix.image }}/.
-      cache: true
-      build-args: GITHUB_PAT=${{ github.token }}
-      meta-images: rapporteket/${{ matrix.image }}
-      meta-tags: |
-        type=ref,event=branch
-        type=schedule,pattern=weekly
-        type=schedule,pattern=main
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_alpine_latex_to_registry:
+  push_amd64only_to_registry:
     needs: push_base_to_registries
     strategy:
       fail-fast: false
       matrix:
-        image: [base-r-alpine-latex]
+        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev, base-r-alpine-latex]
     name: Push ${{ matrix.image }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
@@ -119,6 +62,7 @@ jobs:
       platforms: linux/amd64
       context: ./${{ matrix.image }}/.
       cache: true
+      build-args: GITHUB_PAT=${{ github.token }}
       meta-images: rapporteket/${{ matrix.image }}
       meta-tags: |
         type=ref,event=branch
