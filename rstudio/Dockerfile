@@ -110,6 +110,7 @@ RUN tlmgr option repository https://tlnet.yihui.org/ \
         letltxmacro \
         ltxcmds \
         marginnote \
+        mdwtools \
         microtype \
         oberdiek \
         pdfescape \
