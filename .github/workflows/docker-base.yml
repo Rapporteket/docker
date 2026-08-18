@@ -22,9 +22,9 @@ jobs:
       fail-fast: false
       matrix:
         image:
-          - {name: base-r, platforms: linux/amd64,linux/arm64}
-          - {name: base-r-alpine, platforms: linux/amd64,linux/arm64}
-          - {name: base-r-alpine-latex, platforms: linux/amd64}
+          - {name: base-r, platforms: "linux/amd64,linux/arm64"}
+          - {name: base-r-alpine, platforms: "linux/amd64,linux/arm64"}
+          - {name: base-r-alpine-latex, platforms: "linux/amd64"}
     name: Push ${{ matrix.image.name }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
