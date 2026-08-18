@@ -46,7 +46,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
   push_amd64only_to_registry:
-    needs: push_base_to_registry
     strategy:
       fail-fast: false
       matrix:
