@@ -21,8 +21,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: [base-r, base-r-alpine]
-    name: Push ${{ matrix.image }} image to docker hub
+        image:
+          - {name: base-r, platforms: linux/amd64,linux/arm64}
+          - {name: base-r-alpine, platforms: linux/amd64,linux/arm64}
+          - {name: base-r-alpine-latex, platforms: linux/amd64}
+    name: Push ${{ matrix.image.name }} image to docker hub
     uses: docker/github-builder/.github/workflows/build.yml@v1
     permissions:
       contents: read
@@ -30,40 +33,11 @@ jobs:
     with:
       output: image
       push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64,linux/arm64
-      context: ./${{ matrix.image }}/.
+      platforms: ${{ matrix.image.platforms }}
+      context: ./${{ matrix.image.name }}/.
       cache: true
       build-args: GITHUB_PAT=${{ github.token }}
-      meta-images: rapporteket/${{ matrix.image }}
-      meta-tags: |
-        type=ref,event=branch
-        type=schedule,pattern=weekly
-        type=schedule,pattern=main
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_amd64only_to_registry:
-    needs: push_base_to_registry
-    strategy:
-      fail-fast: false
-      matrix:
-        image: [base-r-alpine-latex]
-    name: Push ${{ matrix.image }} image to docker hub
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64
-      context: ./${{ matrix.image }}/.
-      cache: true
-      build-args: GITHUB_PAT=${{ github.token }}
-      meta-images: rapporteket/${{ matrix.image }}
+      meta-images: rapporteket/${{ matrix.image.name }}
       meta-tags: |
         type=ref,event=branch
         type=schedule,pattern=weekly
