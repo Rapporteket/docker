@@ -45,8 +45,14 @@ jobs:
         - registry: docker.io
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-  push_devs_to_registry:
+  pause_for_30_seconds:
     needs: push_rstudio_to_registry
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pause for 30 seconds
+        run: sleep 30
+  push_devs_to_registry:
+    needs: pause_for_30_seconds
     strategy:
       fail-fast: false
       matrix:
