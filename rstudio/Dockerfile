@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     locales-all \
     default-mysql-client \
     netcat-openbsd \
+    openssh-client \
     tzdata \
     libgit2-dev \
     sudo \
