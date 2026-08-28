@@ -61,6 +61,10 @@ jobs:
       - name: Load image
         run: |
           docker load --input ${{ runner.temp }}/myimage.tar
+          docker image ls
+      - name: Check image again
+        run: |
+          docker image ls
       - name: Check out the repo
         uses: actions/checkout@v7
       - name: Prepare tags
