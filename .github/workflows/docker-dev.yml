@@ -17,49 +17,78 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_rstudio:
+  build_rstudio_base:
     name: Build rstudio image
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: false
-      load: true
-      platforms: linux/amd64
-      context: ./rstudio/.
-      cache: true
-      build-args: GITHUB_PAT=${{ github.token }}
-      meta-images: rstudio
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v7
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Build image
+        uses: docker/build-push-action@v7
+        with:
+          context: ./rstudio/.
+          file: ./rstudio/Dockerfile
+          tags: rstudio:latest
+          push: false
+          load: true
+          pull: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: GITHUB_PAT=${{ github.token }}
+          outputs: type=docker,dest=${{ runner.temp }}/myimage.tar
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: myimage
+          path: ${{ runner.temp }}/myimage.tar
+
   push_devs_to_registry:
-    needs: build_rstudio
+    needs: build_rstudio_base
     strategy:
       fail-fast: false
       matrix:
         image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev]
     name: Push ${{ matrix.image }} image to docker hub
-    uses: docker/github-builder/.github/workflows/build.yml@v1
-    permissions:
-      contents: read
-      id-token: write
-    with:
-      output: image
-      push: ${{ github.event_name != 'pull_request' }}
-      platforms: linux/amd64
-      context: ./${{ matrix.image }}/.
-      cache: true
-      build-args: |
-        GITHUB_PAT=${{ github.token }}
-        BASE_IMAGE=rstudio
-      meta-images: rapporteket/${{ matrix.image }}
-      meta-tags: |
-        type=ref,event=branch
-        type=schedule,pattern=weekly
-        type=schedule,pattern=main
-        type=semver,pattern={{major}}.{{minor}}.{{patch}}
-    secrets:
-      registry-auths: |
-        - registry: docker.io
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: myimage
+          path: ${{ runner.temp }}
+      - name: Load image
+        run: |
+          docker load --input ${{ runner.temp }}/myimage.tar
+      - name: Check out the repo
+        uses: actions/checkout@v7
+      - name: Prepare tags
+        id: docker_meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ matrix.image }}
+          tags: |
+            type=ref,event=branch
+            type=schedule,pattern=weekly
+            type=schedule,pattern=main
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+      - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v4
+        with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build image and push to Docker Hub
+        uses: docker/build-push-action@v7
+        with:
+          context: ./${{ matrix.image }}/.
+          file: ./${{ matrix.image }}/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          build-args: |
+            GH_PAT=${{ secrets.GITHUB_TOKEN }}
+            BASE_IMAGE=rstudio
