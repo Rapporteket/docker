@@ -98,4 +98,4 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             GH_PAT=${{ secrets.GITHUB_TOKEN }}
-            BASE_IMAGE=rstudio
+            BASE_IMAGE=rstudio:latest
