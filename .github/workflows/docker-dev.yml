@@ -19,6 +19,7 @@ concurrency:
 jobs:
   build_rstudio_base:
     name: Build rstudio image
+    runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v7
@@ -45,6 +46,7 @@ jobs:
 
   push_devs_to_registry:
     needs: build_rstudio_base
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
