@@ -30,7 +30,7 @@ jobs:
         with:
           context: ./rstudio/.
           file: ./rstudio/Dockerfile
-          tags: rstudio:latest
+          tags: local/rstudio:latest
           push: false
           load: true
           pull: true
@@ -91,7 +91,7 @@ jobs:
           context: ./${{ matrix.image }}/.
           file: ./${{ matrix.image }}/Dockerfile
           build-contexts: |
-            rstudio=docker-image://rstudio:latest
+            rstudio=docker-image://local/rstudio:latest
           pull: false
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
@@ -100,4 +100,4 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             GH_PAT=${{ secrets.GITHUB_TOKEN }}
-            BASE_IMAGE=rstudio:latest
+            BASE_IMAGE=local/rstudio:latest
