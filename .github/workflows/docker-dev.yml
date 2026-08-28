@@ -39,7 +39,7 @@ jobs:
           build-args: GITHUB_PAT=${{ github.token }}
           outputs: type=docker,dest=${{ runner.temp }}/myimage.tar
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: myimage
           path: ${{ runner.temp }}/myimage.tar
@@ -54,7 +54,7 @@ jobs:
     name: Push ${{ matrix.image }} image to docker hub
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: myimage
           path: ${{ runner.temp }}
@@ -90,6 +90,7 @@ jobs:
         with:
           context: ./${{ matrix.image }}/.
           file: ./${{ matrix.image }}/Dockerfile
+          pull: false
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
