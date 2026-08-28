@@ -90,6 +90,8 @@ jobs:
         with:
           context: ./${{ matrix.image }}/.
           file: ./${{ matrix.image }}/Dockerfile
+          build-contexts: |
+            rstudio=docker-image://rstudio:latest
           pull: false
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker_meta.outputs.tags }}
