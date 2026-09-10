@@ -1,4 +1,6 @@
-FROM rapporteket/rstudio:main
+ARG BASE_IMAGE=rapporteket/rstudio:main
+
+FROM ${BASE_IMAGE}
 
 ARG GITHUB_PAT
 
