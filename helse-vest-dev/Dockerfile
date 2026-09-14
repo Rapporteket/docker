@@ -5,7 +5,8 @@ FROM ${BASE_IMAGE}
 
 ARG GITHUB_PAT
 
-RUN Rscript <<'RSCRIPT'
+RUN <<'RSCRIPT'
+#!/usr/bin/env Rscript
 remotes::install_github(
   c(
     "Rapporteket/ablanor",
