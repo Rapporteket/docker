@@ -98,3 +98,4 @@ jobs:
           build-args: |
             GITHUB_PAT=${{ github.token }}
             BASE_IMAGE=local/rstudio:latest
+          secrets: "gh_pat=${{ secrets.GHT_REPO_READ }}"
