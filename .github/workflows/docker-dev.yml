@@ -71,7 +71,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ matrix.image }}
+          images: rapporteket/${{ matrix.image }}
           tags: |
             type=ref,event=branch
             type=schedule,pattern=weekly
