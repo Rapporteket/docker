@@ -54,7 +54,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev]
+        image: [ltmv-dev, smerte-dev, ablanor-dev, noric-dev, traume-dev, helse-vest-dev]
     name: Push ${{ matrix.image }} image to docker hub
     steps:
       - name: Download artifact
@@ -98,3 +98,4 @@ jobs:
           build-args: |
             GITHUB_PAT=${{ github.token }}
             BASE_IMAGE=local/rstudio:latest
+          secrets: "gh_pat=${{ secrets.GHT_REPO_READ }}"
