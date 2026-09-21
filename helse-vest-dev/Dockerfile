@@ -2,6 +2,8 @@ ARG BASE_IMAGE=rapporteket/rstudio:main
 
 FROM ${BASE_IMAGE}
 
+ARG GITHUB_PAT
+
 RUN --mount=type=secret,id=gh_pat,env=GH_TOKEN \
  R -e "remotes::install_github(c(\
          'Rapporteket/ablanor', \
