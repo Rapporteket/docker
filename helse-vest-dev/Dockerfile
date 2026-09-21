@@ -19,4 +19,4 @@ RUN --mount=type=secret,id=gh_pat,env=GITHUB_PAT \
          'Rapporteket/rapwhale', \
          'Rapporteket/smerte', \
          'Rapporteket/soreg' \
-       ), dependencies = TRUE)"
+       ), dependencies = TRUE, auth_token = Sys.getenv('GITHUB_PAT'))"
