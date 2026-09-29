@@ -32,7 +32,6 @@ RUN installr -d \
            shiny \
            shinyalert \
            sship \
-# tidyverse includes dplyr, ggplot2, readr, tidyr, purrr, tibble, stringr, forcats and lubridate
            tidyverse \ 
            utils \
   && R -e "remotes::install_github('Rapporteket/rapbase')"

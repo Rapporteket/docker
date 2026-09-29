@@ -1,3 +1,5 @@
 scan:
   skip-version-check: true
   disable-telemetry: true
+  skip-dirs:
+    - "/usr/local/lib/R/library/gargle/extdata"
