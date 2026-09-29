@@ -15,28 +15,26 @@ RUN installr -d \
      -a "mariadb-connector-c-dev libuv fontconfig harfbuzz fribidi libxml2 cairo harfbuzz-icu font-liberation mariadb-client" \
            bookdown \
            bslib \
+           Cairo \
            DBI \
            digest \
-           dplyr \
            DT \
            jsonlite \
            kableExtra \
            knitr \
-           plotly \
            logger \
-           readr \
            rlang \
+           plotly \
+           remotes \
            RMariaDB \
            rmarkdown \
            sendmailR \
            shiny \
            shinyalert \
            sship \
-           tidyr \
+# tidyverse includes dplyr, ggplot2, readr, tidyr, purrr, tibble, stringr, forcats and lubridate
+           tidyverse \ 
            utils \
-           ggplot2 \
-           remotes \
-           Cairo \
   && R -e "remotes::install_github('Rapporteket/rapbase')"
 
 CMD ["R"]
