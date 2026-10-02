@@ -91,6 +91,7 @@ RUN apk add --no-cache perl wget tar \
         letltxmacro \
         ltxcmds \
         marginnote \
+        mdwtools \
         microtype \
         oberdiek \
         pdfescape \
