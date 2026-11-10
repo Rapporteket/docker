@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libuv1-dev \
     pandoc \
     libmariadb-dev \
-    libmysqlclient21 \
+    libmysqlclient24 \
     libwebp-dev \
     lmodern \
     locales \
