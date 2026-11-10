@@ -13,6 +13,7 @@ RUN --mount=type=secret,id=gh_pat,env=GH_TOKEN \
          'Rapporteket/korsband', \
          'Rapporteket/kvarus', \
          'Rapporteket/leddprotese', \
+         'Rapporteket/lkg', \
          'Rapporteket/ltmv', \
          'Rapporteket/ms', \
          'Rapporteket/norartritt', \
