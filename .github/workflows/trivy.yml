@@ -31,8 +31,8 @@ jobs:
       matrix:
         config:
           - {name: base-r, severity: 'CRITICAL'}
-          - {name: base-r-alpine, severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'}
-          - {name: base-r-alpine-latex, severity: 'UNKNOWN,LOW,MEDIUM,HIGH,CRITICAL'}
+          - {name: base-r-alpine, severity: 'CRITICAL'}
+          - {name: base-r-alpine-latex, severity: 'CRITICAL'}
     name: Trivy ${{ matrix.config.name }}
     runs-on: ubuntu-26.04
     steps:
