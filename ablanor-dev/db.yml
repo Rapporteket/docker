@@ -1,9 +1,0 @@
-
-# for registry development
-ablanor:
-  host: db
-  name: AblanorRapporteket
-  user: root
-  pass: root
-  disp: ForAblanorDevOnly
-
