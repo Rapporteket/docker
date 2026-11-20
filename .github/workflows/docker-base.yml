@@ -9,6 +9,7 @@ on:
       - main
   schedule:
     - cron: '0 20 * * 0' # run Sundays at 20
+  workflow_dispatch: # allows manual runs from the Actions tab
 
 name: Publish base R Docker images
 
@@ -36,7 +37,7 @@ jobs:
       push: ${{ github.event_name != 'pull_request' }}
       platforms: ${{ matrix.image.platforms }}
       context: ./${{ matrix.image.name }}/.
-      cache: true
+      cache: ${{ github.event_name != 'schedule' && github.event_name != 'workflow_dispatch' }}
       build-args: GITHUB_PAT=${{ github.token }}
       meta-images: rapporteket/${{ matrix.image.name }}
       meta-tags: |
