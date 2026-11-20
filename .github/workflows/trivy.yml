@@ -30,8 +30,9 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {name: base-r}
-          - {name: base-r-alpine}
+          - {name: base-r, severity: 'CRITICAL'}
+          - {name: base-r-alpine, severity: 'CRITICAL'}
+          - {name: base-r-alpine-latex, severity: 'CRITICAL'}
     name: Trivy ${{ matrix.config.name }}
     runs-on: ubuntu-26.04
     steps:
@@ -62,5 +63,5 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL'
+          severity: '${{ matrix.config.severity }}'
           trivy-config: 'trivy.yaml'
